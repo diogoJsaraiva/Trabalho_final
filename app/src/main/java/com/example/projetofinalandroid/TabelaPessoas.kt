@@ -8,7 +8,7 @@ import android.provider.BaseColumns
 class TabelaPessoas (db: SQLiteDatabase) : BaseColumns {
     private val db : SQLiteDatabase = db
     fun cria() {
-        db?.execSQL("CREATE TABLE $NOME_TABELA (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, $CAMPO_NOME TEXT NOT NULL, $CAMPO_TELEFONE TEXT NOT NULL ,$CAMPO_EMAIL TEXT, $CAMPO_MORADA TEXT NOT NULL, $CAMPO_DATA_NASCIMENTO DATA NOT NULL,$CAMPO_CHECK_DOSE_1 BOOLEAN NOT NULL,$CAMPO_DATA_DOSE_1 DATA NOT NULL, $CAMPO_CHECK_DOSE_2 BOOLEAN NOT Null,$CAMPO_DATA_DOSE_2 DATA NOT NULL, $CAMPO_ID_VACINA INTEGER NOT NULL, FOREIGN KEY ($CAMPO_ID_VACINA) REFERENCES ${TabelaVacina.NOME_TABELA})")
+        db?.execSQL("CREATE TABLE $NOME_TABELA (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, $CAMPO_NOME TEXT NOT NULL, $CAMPO_TELEFONE TEXT NOT NULL ,$CAMPO_EMAIL TEXT, $CAMPO_MORADA TEXT NOT NULL, $CAMPO_DATA_NASCIMENTO DATA NOT NULL, $CAMPO_ID_VACINA INTEGER NOT NULL, FOREIGN KEY ($CAMPO_ID_VACINA) REFERENCES ${TabelaVacina.NOME_TABELA},$CAMPO_ID_MARCACAO INTEGER NOT NULL, FOREIGN KEY ($CAMPO_ID_MARCACAO REFERENCES ${TabelaMarcacoes.NOME_TABELA}))")
     }
 
 
@@ -42,10 +42,7 @@ class TabelaPessoas (db: SQLiteDatabase) : BaseColumns {
         const val CAMPO_EMAIL = "email"
         const val CAMPO_MORADA = "morada"
         const val CAMPO_DATA_NASCIMENTO = "datanascimento"
-        const val CAMPO_DATA_DOSE_1 = "datadose1"
-        const val CAMPO_CHECK_DOSE_1 = "levoudose"
-        const val CAMPO_DATA_DOSE_2 = "datadose2"
-        const val CAMPO_CHECK_DOSE_2 = "levoudose"
+        const val CAMPO_ID_MARCACAO = "id_marcacao"
         const val CAMPO_ID_VACINA = "id_vacina"
 
     }
