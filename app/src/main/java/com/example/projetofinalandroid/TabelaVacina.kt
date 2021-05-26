@@ -5,12 +5,10 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.provider.BaseColumns
 
-class TabelaDoseVacina(db: SQLiteDatabase) : BaseColumns  {
+class TabelaVacina(db: SQLiteDatabase) : BaseColumns  {
     private val db: SQLiteDatabase = db
     fun cria() {
         db.execSQL("CREATE TABLE $NOME_TABELA (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, $CAMPO_NUMERO NUMBER NOT NULL,$CAMPO_NOME TEXT NOT NULL, $CAMPO_SINTOMAS TEXT NOT NULL)")
-
-
     }
 
     fun insert(values: ContentValues): Long {
