@@ -46,7 +46,7 @@ class TesteBaseDados {
     }
 
    @Test
-   fun consegueInserirCategorias(){
+   fun consegueInserirVacina(){
        val db = getBdvacinasOpenHelper().writableDatabase
 
 
@@ -76,6 +76,26 @@ class TesteBaseDados {
 
 
         db.close()
+    }
+
+    @Test
+    fun consegueLerVacina(){
+        val db = getBdvacinasOpenHelper().writableDatabase
+        val gettabelaCategorias = gettabelaVacina(db)
+        val vacina = Vacina(nome="Pfizer",quantidade = 2)
+        vacina.id = inserirVacina(gettabelaCategorias,vacina)
+
+        val cursor = gettabelaCategorias.query(
+                TabelaVacina.TODOS_CAMPOS,
+                "${BaseColumns._ID}=?",
+                arrayOf(vacina.id.toString()),
+                null,null,null
+        )
+
+        assertNotNull(cursor)
+        assert(cursor!!.moveToNext())
+
+
     }
 
 
