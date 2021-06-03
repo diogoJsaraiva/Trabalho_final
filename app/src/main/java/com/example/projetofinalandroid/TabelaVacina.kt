@@ -13,7 +13,7 @@ class TabelaVacina(db: SQLiteDatabase) : BaseColumns  {
         return db.insert(NOME_TABELA,null,values)
     }
 
-    fun update(values: ContentValues, whereArgs: Array<String>, whereClause: String): Int {
+    fun update(values: ContentValues, whereClause: String, whereArgs: Array<String>): Int {
         return db.update(NOME_TABELA,values,whereClause,whereArgs)
 
 
