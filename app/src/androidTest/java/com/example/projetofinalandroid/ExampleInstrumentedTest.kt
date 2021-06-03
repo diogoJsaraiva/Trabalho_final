@@ -1,8 +1,10 @@
 package com.example.projetofinalandroid
 
 import android.database.sqlite.SQLiteDatabase
+import android.provider.BaseColumns
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.google.android.material.tabs.TabLayout
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -53,6 +55,30 @@ class TesteBaseDados {
 
        db.close()
    }
+
+    @Test
+    fun consegueAlterarVacina(){
+        val db = getBdvacinasOpenHelper().writableDatabase
+
+        val vacina = Vacina(nome="Pfizer",quantidade = 2)
+        val tabelaVacinas = gettabelaVacina(db)
+
+        inserirVacina(tabelaVacinas, vacina)
+        vacina.id = inserirVacina(tabelaVacinas,vacina)
+        vacina.nome = "Pfizer"
+        vacina.quantidade = 2
+        val registosAlterados = tabelaVacinas.update(
+                vacina.toContentValues(),"${BaseColumns._ID}=?",
+                arrayOf(vacina.id.toString())
+        )
+
+        assertEquals(1, registosAlterados)
+
+
+        db.close()
+    }
+
+
 
 
 }
