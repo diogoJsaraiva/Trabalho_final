@@ -16,7 +16,7 @@ class Vacina (var id: Long = -1, var nome: String, var quantidade : String) {
     companion object {
         fun fromCursor(cursor: Cursor): Vacina {
             val colId = cursor.getColumnIndex(BaseColumns._ID)
-            
+
             val colNome = cursor.getColumnIndex(TabelaVacina.CAMPO_NOME)
             val colQuantidade = cursor.getColumnIndex(TabelaVacina.CAMPO_QUANTIDADE)
 
