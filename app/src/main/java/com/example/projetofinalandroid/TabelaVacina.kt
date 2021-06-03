@@ -7,7 +7,7 @@ import android.provider.BaseColumns
 
 class TabelaVacina(db: SQLiteDatabase) : BaseColumns  {
     private val db: SQLiteDatabase = db
-    fun cria() = db.execSQL("CREATE TABLE $NOME_TABELA (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT,$CAMPO_NOME TEXT NOT NULL,$CAMPO_QUANTIDADE NUMBER NOT NULL)")
+    fun cria() = db.execSQL("CREATE TABLE $NOME_TABELA (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT,$CAMPO_NOME TEXT NOT NULL,$CAMPO_QUANTIDADE INTEGER NOT NULL)")
 
     fun insert(values: ContentValues): Long {
         return db.insert(NOME_TABELA,null,values)
