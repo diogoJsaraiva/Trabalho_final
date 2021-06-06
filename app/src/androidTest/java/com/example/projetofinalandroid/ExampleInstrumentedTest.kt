@@ -4,7 +4,6 @@ import android.database.sqlite.SQLiteDatabase
 import android.provider.BaseColumns
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.google.android.material.tabs.TabLayout
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -22,10 +21,12 @@ class TesteBaseDados {
     private fun getAppContext() = InstrumentationRegistry.getInstrumentation().targetContext
     private fun getBdvacinasOpenHelper() = BdMarcacoesOpenHelper(getAppContext())
 
-    private fun gettabelaVacina(db: SQLiteDatabase) = TabelaVacina(db)
+    private fun getTabelaVacina(db: SQLiteDatabase) = TabelaVacina(db)
+    private fun getTabelaMarcacoes(db: SQLiteDatabase) = TabelaMarcacoes(db)
+    private fun getTabelaPessoas(db: SQLiteDatabase) = TabelaPessoas(db)
 
-    private fun inserirVacina(gettabelaCategorias: TabelaVacina, categoria: Vacina) : Long {
-        val id = gettabelaCategorias.insert(categoria.toContentValues())
+    private fun inserirVacina(tabelaVacina: TabelaVacina, vacina: Vacina) : Long {
+        val id = tabelaVacina.insert(vacina.toContentValues())
         assertNotEquals(-1, id)
         return id
     }
@@ -51,7 +52,7 @@ class TesteBaseDados {
 
 
        val vacina = Vacina(nome="Pfizer",quantidade = 10)
-       inserirVacina(gettabelaVacina(db), vacina)
+       inserirVacina(getTabelaVacina(db), vacina)
 
        db.close()
    }
@@ -61,7 +62,7 @@ class TesteBaseDados {
         val db = getBdvacinasOpenHelper().writableDatabase
 
         val vacina = Vacina(nome="Pfizer",quantidade = 2)
-        val tabelaVacinas = gettabelaVacina(db)
+        val tabelaVacinas = getTabelaVacina(db)
 
         inserirVacina(tabelaVacinas, vacina)
         vacina.id = inserirVacina(tabelaVacinas,vacina)
@@ -81,7 +82,7 @@ class TesteBaseDados {
     @Test
     fun consegueLerVacina(){
         val db = getBdvacinasOpenHelper().writableDatabase
-        val gettabelaCategorias = gettabelaVacina(db)
+        val gettabelaCategorias = getTabelaVacina(db)
         val vacina = Vacina(nome="Pfizer",quantidade = 2)
         vacina.id = inserirVacina(gettabelaCategorias,vacina)
 
