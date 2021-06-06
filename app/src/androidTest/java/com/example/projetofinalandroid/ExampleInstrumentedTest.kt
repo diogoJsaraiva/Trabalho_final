@@ -45,9 +45,9 @@ class TesteBaseDados {
     }
 
 
-    private fun getVacinaBaseDados(tabela: TabelaVacina , id:Long): Vacina {
+    private fun getVacinaBaseDados(tabelaVacina:TabelaVacina , id:Long): Vacina {
 
-        val cursor = tabela.query(
+        val cursor = tabelaVacina.query(
                 TabelaVacina.TODOS_CAMPOS,
                 "${BaseColumns._ID} =?",
                 arrayOf(id.toString()),
@@ -59,6 +59,19 @@ class TesteBaseDados {
         return Vacina.fromCursor(cursor)
     }
 
+    private fun getPessoasBaseDados(tabelaPessoas: TabelaPessoas , id:Long): Pessoas {
+
+        val cursor = tabelaPessoas.query(
+                TabelaPessoas.TODOS_CAMPOS,
+                "${BaseColumns._ID} =?",
+                arrayOf(id.toString()),
+                null,null,null
+        )
+        assertNotNull(cursor)
+        assert(cursor!!.moveToNext())
+
+        return Pessoas.fromCursor(cursor)
+    }
 
 
 
