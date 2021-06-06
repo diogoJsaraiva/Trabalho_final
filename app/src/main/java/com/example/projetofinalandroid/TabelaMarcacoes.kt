@@ -51,7 +51,15 @@ class TabelaMarcacoes(db: SQLiteDatabase) : BaseColumns  {
         const val CAMPO_CHECK_DOSE_2 = "levoudose"
         const val CAMPO_ID_VACINA = "id_vacina"
         const val CAMPO_ID_PESSOA = "id_pessoa"
+        val TODOS_CAMPOS = arrayOf(BaseColumns._ID, TabelaMarcacoes.CAMPO_DATA_DOSE_1,
+                TabelaMarcacoes.CAMPO_CHECK_DOSE_1,
+                TabelaMarcacoes.CAMPO_DATA_DOSE_2,
+                TabelaMarcacoes.CAMPO_DATA_DOSE_2,
+                TabelaMarcacoes.CAMPO_CHECK_DOSE_2,
+                TabelaMarcacoes.CAMPO_ID_VACINA,
+                TabelaMarcacoes.CAMPO_ID_PESSOA
 
+        )
     }
 
 
