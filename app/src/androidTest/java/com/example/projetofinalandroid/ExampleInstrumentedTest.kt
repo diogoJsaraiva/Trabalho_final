@@ -31,6 +31,23 @@ class TesteBaseDados {
         return id
     }
 
+    private fun inserirPessoas(tabelaPessoas: TabelaPessoas,pessoas: Pessoas) : Long {
+        val id = tabelaPessoas.insert(pessoas.toContentValues())
+        assertNotEquals(-1, id)
+        return id
+    }
+
+
+    private fun inserirMarcacoes(tabelaMarcacoes: TabelaMarcacoes,marcacoes: Marcacoes) : Long {
+        val id = tabelaMarcacoes.insert(marcacoes.toContentValues())
+        assertNotEquals(-1, id)
+        return id
+    }
+    
+
+
+
+
 
     @Before
     fun apagaBaseDados() {
@@ -56,6 +73,8 @@ class TesteBaseDados {
 
        db.close()
    }
+
+
 
     @Test
     fun consegueAlterarVacina(){
@@ -99,19 +118,7 @@ class TesteBaseDados {
 
     }
 
-    private fun getVacinaBaseDados(tabela: TabelaVacina , id:Long): Vacina {
 
-        val cursor = tabela.query(
-                TabelaVacina.TODOS_CAMPOS,
-                "${BaseColumns._ID} =?",
-                arrayOf(id.toString()),
-                null,null,null
-        )
-        assertNotNull(cursor)
-        assert(cursor!!.moveToNext())
-
-        return Vacina.fromCursor(cursor)
-    }
 
 
 }
