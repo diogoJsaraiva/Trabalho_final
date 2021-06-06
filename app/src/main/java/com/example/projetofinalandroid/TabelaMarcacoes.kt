@@ -8,7 +8,7 @@ import android.provider.BaseColumns
 class TabelaMarcacoes(db: SQLiteDatabase) : BaseColumns  {
     private val db: SQLiteDatabase = db
     fun cria() {
-        db.execSQL("CREATE TABLE $NOME_TABELA (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, $CAMPO_DATA_DOSE_1 TEXT NOT NULL, $CAMPO_CHECK_DOSE_1 TEXT NOT NULL, $CAMPO_DATA_DOSE_2 TEXT NOT NULL, $CAMPO_CHECK_DOSE_2 TEXT NOT NULL,$CAMPO_ID_VACINA INTEGER NOT NULL, FOREIGN KEY ($CAMPO_ID_VACINA) REFERENCES ${TabelaVacina.NOME_TABELA} )")
+        db.execSQL("CREATE TABLE $NOME_TABELA (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, $CAMPO_DATA_DOSE_1 TEXT NOT NULL, $CAMPO_CHECK_DOSE_1 TEXT NOT NULL, $CAMPO_DATA_DOSE_2 TEXT NOT NULL, $CAMPO_CHECK_DOSE_2 TEXT NOT NULL,$CAMPO_ID_VACINA INTEGER NOT NULL, FOREIGN KEY ($CAMPO_ID_VACINA) REFERENCES ${TabelaVacina.NOME_TABELA}, FOREIGN KEY ($CAMPO_ID_PESSOA) REFERENCES ${TabelaPessoas.NOME_TABELA} )")
 
     }
 
@@ -50,6 +50,7 @@ class TabelaMarcacoes(db: SQLiteDatabase) : BaseColumns  {
         const val CAMPO_DATA_DOSE_2 = "datadose2"
         const val CAMPO_CHECK_DOSE_2 = "levoudose"
         const val CAMPO_ID_VACINA = "id_vacina"
+        const val CAMPO_ID_PESSOA = "id_pessoa"
 
     }
 
