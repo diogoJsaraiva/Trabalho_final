@@ -74,6 +74,20 @@ class TesteBaseDados {
     }
 
 
+    private fun getMarcacoesBaseDados(tabelaMarcacoes: TabelaMarcacoes , id:Long): Pessoas {
+
+        val cursor = tabelaMarcacoes.query(
+                TabelaMarcacoes.TODOS_CAMPOS,
+                "${BaseColumns._ID} =?",
+                arrayOf(id.toString()),
+                null,null,null
+        )
+        assertNotNull(cursor)
+        assert(cursor!!.moveToNext())
+
+        return Pessoas.fromCursor(cursor)
+    }
+
 
 
 
