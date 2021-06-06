@@ -108,10 +108,14 @@ class TesteBaseDados {
    @Test
    fun consegueInserirVacina(){
        val db = getBdvacinasOpenHelper().writableDatabase
-
-
+       val tabelaVacina = getTabelaVacina(db);
        val vacina = Vacina(nome="Pfizer",quantidade = 10)
-       inserirVacina(getTabelaVacina(db), vacina)
+
+       vacina.id = inserirVacina(tabelaVacina,vacina)
+
+       val vacinaBD = getVacinaBaseDados(tabelaVacina,vacina.id)
+
+       assertEquals(vacina, vacinaBD)
 
        db.close()
    }
