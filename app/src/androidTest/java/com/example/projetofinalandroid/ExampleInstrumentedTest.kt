@@ -179,8 +179,36 @@ class TesteBaseDados {
 
 
     }
+    @Test
+    fun consegueInserirMarcacoes(){
+        val db = getBdvacinasOpenHelper().writableDatabase
+        val tabelaMarcacoes= getTabelaMarcacoes(db);
+        val tabelaVacina = getTabelaVacina(db)
+        val tabelaPessoas = getTabelaPessoas(db)
 
 
+        val vacina = Vacina(nome="Moderna",quantidade = 300)
+        vacina.id=inserirVacina(tabelaVacina,vacina)
+
+        val  marcacoes = Marcacoes(dose1 = 0, checkdose1 = "?",dose2 = 0 ,checkdose2 = "?",idVacina = 0 ,idPessoa = 0)
+
+
+        val pessoas = Pessoas(nome="Antonio",telefone = "92383248",dataNascimento = 10111993,email = "antonio@hotmail.com",morada = "rua do Fernando ",idmarcacao = marcacoes.id )
+        pessoas.id=inserirPessoas(tabelaPessoas,pessoas)
+
+
+        marcacoes.id = inserirMarcacoes(tabelaMarcacoes,marcacoes)
+
+        Marcacoes(dose1 = 20062021,checkdose1 = "Ok",dose2 = 20072021,checkdose2 = "ainda por receber",idVacina = vacina.id,idPessoa = pessoas.id)
+
+
+
+        val marcacoesBD = getMarcacoesBaseDados(tabelaMarcacoes,marcacoes.id)
+
+        assertEquals(marcacoes, marcacoesBD)
+
+        db.close()
+    }
 
 
 }
