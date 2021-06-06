@@ -140,8 +140,8 @@ class TesteBaseDados {
         )
 
         assertEquals(1, registosAlterados)
-        val livroBD = getVacinaBaseDados(tabelaVacina, vacina.id)
-        assertEquals(vacina, livroBD)
+        val VacinaBD = getVacinaBaseDados(tabelaVacina, vacina.id)
+        assertEquals(vacina, VacinaBD)
 
         db.close()
     }
@@ -167,19 +167,15 @@ class TesteBaseDados {
     @Test
     fun consegueLerVacina(){
         val db = getBdvacinasOpenHelper().writableDatabase
-        val gettabelaCategorias = getTabelaVacina(db)
-        val vacina = Vacina(nome="Pfizer",quantidade = 2)
-        vacina.id = inserirVacina(gettabelaCategorias,vacina)
+        val tabelaVacina = getTabelaVacina(db)
+        val vacina = Vacina(nome="Moderna",quantidade = 300)
 
-        val cursor = gettabelaCategorias.query(
-                TabelaVacina.TODOS_CAMPOS,
-                "${BaseColumns._ID}=?",
-                arrayOf(vacina.id.toString()),
-                null,null,null
-        )
+        vacina.id = inserirVacina(tabelaVacina,vacina)
 
-        assertNotNull(cursor)
-        assert(cursor!!.moveToNext())
+        val vacinaBD = getVacinaBaseDados(tabelaVacina, vacina.id)
+        assertEquals(vacina, vacinaBD)
+
+        db.close()
 
 
     }
