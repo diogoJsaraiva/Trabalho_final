@@ -44,6 +44,15 @@ class TabelaPessoas (db: SQLiteDatabase) : BaseColumns {
         const val CAMPO_DATA_NASCIMENTO = "datanascimento"
         const val CAMPO_ID_MARCACAO = "id_marcacao"
 
+        val TODOS_CAMPOS = arrayOf(BaseColumns._ID, TabelaPessoas.CAMPO_NOME,
+                TabelaPessoas.CAMPO_TELEFONE,
+                TabelaPessoas.CAMPO_TELEFONE,
+                TabelaPessoas.CAMPO_EMAIL,
+                TabelaPessoas.CAMPO_MORADA,
+                TabelaPessoas.CAMPO_DATA_NASCIMENTO,
+                TabelaPessoas.CAMPO_ID_MARCACAO
+
+        )
     }
 
 }
