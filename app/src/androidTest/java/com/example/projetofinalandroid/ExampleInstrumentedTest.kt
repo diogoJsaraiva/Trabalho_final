@@ -150,7 +150,7 @@ class TesteBaseDados {
     fun consegueApagarVacinas(){
         val db = getBdvacinasOpenHelper().writableDatabase
         val tabelaVacinas = getTabelaVacina(db);
-        val vacina = Vacina(nome = "?",quantidade = 0;)
+        val vacina = Vacina(nome = "?",quantidade = 0)
 
         vacina.id = inserirVacina(tabelaVacinas, vacina)
 
