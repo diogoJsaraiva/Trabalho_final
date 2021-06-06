@@ -43,7 +43,22 @@ class TesteBaseDados {
         assertNotEquals(-1, id)
         return id
     }
-    
+
+
+    private fun getVacinaBaseDados(tabela: TabelaVacina , id:Long): Vacina {
+
+        val cursor = tabela.query(
+                TabelaVacina.TODOS_CAMPOS,
+                "${BaseColumns._ID} =?",
+                arrayOf(id.toString()),
+                null,null,null
+        )
+        assertNotNull(cursor)
+        assert(cursor!!.moveToNext())
+
+        return Vacina.fromCursor(cursor)
+    }
+
 
 
 
