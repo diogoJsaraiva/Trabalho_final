@@ -8,7 +8,7 @@ import android.provider.BaseColumns
 class TabelaPessoas (db: SQLiteDatabase) : BaseColumns {
     private val db : SQLiteDatabase = db
     fun cria() {
-        db?.execSQL("CREATE TABLE $NOME_TABELA (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, $CAMPO_NOME TEXT NOT NULL, $CAMPO_TELEFONE TEXT NOT NULL ,$CAMPO_EMAIL TEXT, $CAMPO_MORADA TEXT NOT NULL, $CAMPO_DATA_NASCIMENTO INTEGER NOT NULL,$CAMPO_ID_MARCACAO INTEGER NOT NULL, FOREIGN KEY ($CAMPO_ID_MARCACAO) REFERENCES ${TabelaMarcacoes.NOME_TABELA})")
+        db?.execSQL("CREATE TABLE $NOME_TABELA (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, $CAMPO_NOME TEXT NOT NULL, $CAMPO_TELEFONE TEXT NOT NULL ,$CAMPO_EMAIL TEXT, $CAMPO_MORADA TEXT NOT NULL, $CAMPO_DATA_NASCIMENTO INTEGER NOT NULL)")
     }
 
 
@@ -42,15 +42,14 @@ class TabelaPessoas (db: SQLiteDatabase) : BaseColumns {
         const val CAMPO_EMAIL = "email"
         const val CAMPO_MORADA = "morada"
         const val CAMPO_DATA_NASCIMENTO = "datanascimento"
-        const val CAMPO_ID_MARCACAO = "id_marcacao"
+
 
         val TODOS_CAMPOS = arrayOf(BaseColumns._ID, TabelaPessoas.CAMPO_NOME,
                 TabelaPessoas.CAMPO_TELEFONE,
-                TabelaPessoas.CAMPO_TELEFONE,
                 TabelaPessoas.CAMPO_EMAIL,
                 TabelaPessoas.CAMPO_MORADA,
-                TabelaPessoas.CAMPO_DATA_NASCIMENTO,
-                TabelaPessoas.CAMPO_ID_MARCACAO
+                TabelaPessoas.CAMPO_DATA_NASCIMENTO
+
 
         )
     }
