@@ -7,7 +7,7 @@ import android.provider.BaseColumns
 
 class TabelaVacina(db: SQLiteDatabase) : BaseColumns  {
     private val db: SQLiteDatabase = db
-    fun cria() = db.execSQL("CREATE TABLE $NOME_TABELA (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT,$CAMPO_NOME TEXT NOT NULL,$CAMPO_QUANTIDADE INTEGER NOT NULL)")
+    fun cria() = db.execSQL("CREATE TABLE $NOME_TABELA (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT,$CAMPO_NOME TEXT NOT NULL)")
 
     fun insert(values: ContentValues): Long {
         return db.insert(NOME_TABELA,null,values)
@@ -43,8 +43,6 @@ class TabelaVacina(db: SQLiteDatabase) : BaseColumns  {
     companion object{
         const val NOME_TABELA = "Vacina"
         const val CAMPO_NOME = "Vacina"
-        const val CAMPO_QUANTIDADE = "Stock"
-
-        val TODOS_CAMPOS = arrayOf(BaseColumns._ID, CAMPO_NOME, CAMPO_QUANTIDADE)
+        val TODOS_CAMPOS = arrayOf(BaseColumns._ID, CAMPO_NOME,TabelaVacina.CAMPO_NOME)
     }
 }
