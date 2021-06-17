@@ -8,7 +8,7 @@ import android.provider.BaseColumns
 class TabelaMarcacoes(db: SQLiteDatabase) : BaseColumns  {
     private val db: SQLiteDatabase = db
     fun cria() {
-        db.execSQL("CREATE TABLE $NOME_TABELA (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, $CAMPO_DATA_DOSE_1 INTEGER NOT NULL, $CAMPO_CHECK_DOSE_1 TEXT NOT NULL, $CAMPO_DATA_DOSE_2 INTEGER NOT NULL, $CAMPO_CHECK_DOSE_2 TEXT NOT NULL,$CAMPO_ID_VACINA INTEGER NOT NULL, FOREIGN KEY ($CAMPO_ID_VACINA) REFERENCES ${TabelaVacina.NOME_TABELA}, FOREIGN KEY ($CAMPO_ID_PESSOA) REFERENCES ${TabelaPessoas.NOME_TABELA} )")
+        db.execSQL("CREATE TABLE $NOME_TABELA (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, $CAMPO_DATA_DOSE INTEGER NOT NULL,$CAMPO_ID_VACINA INTEGER NOT NULL, FOREIGN KEY ($CAMPO_ID_VACINA) REFERENCES ${TabelaVacina.NOME_TABELA}, FOREIGN KEY ($CAMPO_ID_PESSOA) REFERENCES ${TabelaPessoas.NOME_TABELA} )")
 
     }
 
@@ -45,17 +45,12 @@ class TabelaMarcacoes(db: SQLiteDatabase) : BaseColumns  {
 
     companion object{
         const val NOME_TABELA = "Marcação"
-        const val CAMPO_DATA_DOSE_1 = "datadose1"
-        const val CAMPO_CHECK_DOSE_1 = "levoudose"
-        const val CAMPO_DATA_DOSE_2 = "datadose2"
-        const val CAMPO_CHECK_DOSE_2 = "levoudose"
+        const val CAMPO_DATA_DOSE = "datadose"
+        const val CAMPO_NUMERO_DOSE = "numero_dose"
         const val CAMPO_ID_VACINA = "id_vacina"
         const val CAMPO_ID_PESSOA = "id_pessoa"
-        val TODOS_CAMPOS = arrayOf(BaseColumns._ID, TabelaMarcacoes.CAMPO_DATA_DOSE_1,
-                TabelaMarcacoes.CAMPO_CHECK_DOSE_1,
-                TabelaMarcacoes.CAMPO_DATA_DOSE_2,
-                TabelaMarcacoes.CAMPO_DATA_DOSE_2,
-                TabelaMarcacoes.CAMPO_CHECK_DOSE_2,
+        val TODOS_CAMPOS = arrayOf(BaseColumns._ID, TabelaMarcacoes.CAMPO_DATA_DOSE,
+                TabelaMarcacoes.CAMPO_NUMERO_DOSE,
                 TabelaMarcacoes.CAMPO_ID_VACINA,
                 TabelaMarcacoes.CAMPO_ID_PESSOA
 
