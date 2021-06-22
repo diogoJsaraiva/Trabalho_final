@@ -4,7 +4,7 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.provider.BaseColumns
 
-class Pessoas (var id: Long = -1, var nome: String, var telefone : String, var email:String,var morada: String, var dataNascimento: Int,var idmarcacao : Long) {
+class Pessoas (var id: Long = -1, var nome: String, var telefone : String, var email:String,var morada: String, var dataNascimento: Int) {
     fun toContentValues(): ContentValues {
         val valores = ContentValues()
         valores.put(TabelaPessoas.CAMPO_NOME, nome)
@@ -12,7 +12,7 @@ class Pessoas (var id: Long = -1, var nome: String, var telefone : String, var e
         valores.put(TabelaPessoas.CAMPO_EMAIL, email)
         valores.put(TabelaPessoas.CAMPO_MORADA, morada)
         valores.put(TabelaPessoas.CAMPO_DATA_NASCIMENTO, dataNascimento)
-        valores.put(TabelaPessoas.CAMPO_ID_MARCACAO, idmarcacao)
+
 
         return valores
     }
@@ -26,7 +26,7 @@ class Pessoas (var id: Long = -1, var nome: String, var telefone : String, var e
             val colEmail = cursor.getColumnIndex(TabelaPessoas.CAMPO_EMAIL)
             val colMorada = cursor.getColumnIndex(TabelaPessoas.CAMPO_MORADA)
             val colNascimento = cursor.getColumnIndex(TabelaPessoas.CAMPO_DATA_NASCIMENTO)
-            val colMarcacao = cursor.getColumnIndex(TabelaPessoas.CAMPO_ID_MARCACAO)
+
 
             val id = cursor.getLong(colId)
             val nome = cursor.getString(colNome)
@@ -34,9 +34,9 @@ class Pessoas (var id: Long = -1, var nome: String, var telefone : String, var e
             val email = cursor.getString(colEmail)
             val morada = cursor.getString(colMorada)
             val nascimento = cursor.getInt(colNascimento)
-            val marcacao = cursor.getLong(colMarcacao)
 
-            return Pessoas(id, nome,telefone,email,morada,nascimento,marcacao)
+
+            return Pessoas(id, nome,telefone,email,morada,nascimento)
         }
     }
 }
