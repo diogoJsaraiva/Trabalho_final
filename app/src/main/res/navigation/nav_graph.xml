@@ -16,10 +16,10 @@
             app:destination="@id/action_vacina_novo" />
     </fragment>
     <fragment
-        android:id="@+id/action_vacina_novo"
-        android:name="com.example.projetofinalandroid.SecondFragment"
+        android:id="@+id/action_marcacoes_novo"
+        android:name="com.example.projetofinalandroid.NovoMarcacaoFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_novo_marcacao">
 
         <action
             android:id="@+id/NovaVacinaFragment_to_ListaVacinaFragment"
