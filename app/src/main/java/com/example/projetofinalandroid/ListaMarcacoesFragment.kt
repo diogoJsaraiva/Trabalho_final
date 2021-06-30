@@ -26,16 +26,16 @@ class ListaMarcacoesFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>
 
 
 
-        return inflater.inflate(R.layout.fragment_Vacina, container, false)
+        return inflater.inflate(R.layout.fragment_marcacoes_lista, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerViewVacina = view.findViewById<RecyclerView>(R.id.RecyclerViewVacina)
+        val recyclerViewMarcacoes = view.findViewById<RecyclerView>(R.id.recyclerViewMarcacoes)
         adapterMarcacoes = AdapterMarcacoes(this)
-        recyclerViewVacina.adapter = adapterMarcacoes
-        recyclerViewVacina.layoutManager = LinearLayoutManager(requireContext())
+        recyclerViewMarcacoes.adapter = adapterMarcacoes
+        recyclerViewMarcacoes.layoutManager = LinearLayoutManager(requireContext())
 
         val loaderManager = LoaderManager.getInstance(this)
 
