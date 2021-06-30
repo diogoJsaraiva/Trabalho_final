@@ -3,12 +3,11 @@ package com.example.projetofinalandroid
 import android.database.Cursor
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 
-class AdapterVacina( val fragment: ListaVacinaFragment): RecyclerView.Adapter<AdapterVacina.ViewHolderVacina>() {
+class AdapterMarcacoes(val fragment: ListaMarcacoesFragment): RecyclerView.Adapter<AdapterMarcacoes.ViewHolderVacina>() {
     public var cursor: Cursor? = null
         get() = field
         set(value) {
@@ -92,7 +91,7 @@ class AdapterVacina( val fragment: ListaVacinaFragment): RecyclerView.Adapter<Ad
      * @see .onBindViewHolder
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderVacina {
-        val itemVacina = fragment.layoutInflater.inflate(R.layout.item_vacina, parent, false)
+        val itemVacina = fragment.layoutInflater.inflate(R.layout.item_marcacao, parent, false)
         return ViewHolderVacina(itemVacina)
     }
 
