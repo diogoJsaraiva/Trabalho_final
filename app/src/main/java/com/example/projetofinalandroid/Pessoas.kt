@@ -3,15 +3,16 @@ package com.example.projetofinalandroid
 import android.content.ContentValues
 import android.database.Cursor
 import android.provider.BaseColumns
+import java.util.*
 
-class Pessoas (var id: Long = -1, var nome: String, var telefone : String, var email:String,var morada: String, var dataNascimento: Int) {
+class Pessoas (var id: Long = -1, var nome: String, var telefone : String, var email:String,var morada: String, var dataNascimento: Date) {
     fun toContentValues(): ContentValues {
         val valores = ContentValues()
         valores.put(TabelaPessoas.CAMPO_NOME, nome)
         valores.put(TabelaPessoas.CAMPO_TELEFONE, telefone)
         valores.put(TabelaPessoas.CAMPO_EMAIL, email)
         valores.put(TabelaPessoas.CAMPO_MORADA, morada)
-        valores.put(TabelaPessoas.CAMPO_DATA_NASCIMENTO, dataNascimento)
+        valores.put(TabelaPessoas.CAMPO_DATA_NASCIMENTO, dataNascimento.time)
 
 
         return valores
@@ -33,10 +34,10 @@ class Pessoas (var id: Long = -1, var nome: String, var telefone : String, var e
             val telefone = cursor.getString(colTelefone)
             val email = cursor.getString(colEmail)
             val morada = cursor.getString(colMorada)
-            val nascimento = cursor.getInt(colNascimento)
+            val nascimento = cursor.getLong(colNascimento)
 
 
-            return Pessoas(id, nome,telefone,email,morada,nascimento)
+            return Pessoas(id, nome,telefone,email,morada, Date(nascimento))
         }
     }
 }

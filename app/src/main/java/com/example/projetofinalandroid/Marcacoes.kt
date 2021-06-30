@@ -10,7 +10,7 @@ class Marcacoes(
     var idVacina: Long, var idPessoa: Long) {
     fun toContentValues(): ContentValues {
         val valores = ContentValues()
-        valores.put(TabelaMarcacoes.CAMPO_DATA_DOSE, datadose)
+        valores.put(TabelaMarcacoes.CAMPO_DATA_DOSE, datadose.date)
         valores.put(TabelaMarcacoes.CAMPO_NUMERO_DOSE, numero_dose)
         valores.put(TabelaMarcacoes.CAMPO_ID_VACINA, idVacina)
         valores.put(TabelaMarcacoes.CAMPO_ID_VACINA, idPessoa)
