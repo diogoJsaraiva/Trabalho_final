@@ -10,4 +10,10 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="textview">TextView</string>
+    <string name="data">12/10/2000</string>
+    <string name="numero_dose">1</string>
+    <string name="spinnervacina">spinnerVacina</string>
+    <string name="adicionarmarcacao">adicionarMarcacao</string>
+    <string name="editarmarcacao">EditarMarcacao</string>
+    <string name="eliminarmarcacao">EliminarMarcacao</string>
 </resources>
