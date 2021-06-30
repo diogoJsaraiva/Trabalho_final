@@ -10,6 +10,7 @@ import org.junit.runner.RunWith
 
 import org.junit.Assert.*
 import org.junit.Before
+import java.util.*
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -109,7 +110,7 @@ class TesteBaseDados {
    fun consegueInserirVacina(){
        val db = getBdvacinasOpenHelper().writableDatabase
        val tabelaVacina = getTabelaVacina(db);
-       val vacina = Vacina(nome="Pfizer",quantidade = 10)
+       val vacina = Vacina(nome="Pfizer")
 
        vacina.id = inserirVacina(tabelaVacina,vacina)
 
@@ -126,13 +127,12 @@ class TesteBaseDados {
     fun consegueAlterarVacina(){
         val db = getBdvacinasOpenHelper().writableDatabase
         val tabelaVacina = getTabelaVacina(db);
-        val vacina = Vacina(nome="?",quantidade = 0)
+        val vacina = Vacina(nome="?")
 
         vacina.id = inserirVacina(tabelaVacina,vacina)
 
 
         vacina.nome = "Pfizer"
-        vacina.quantidade = 10
 
         val registosAlterados = tabelaVacina.update(
                 vacina.toContentValues(),"${BaseColumns._ID}=?",
@@ -150,7 +150,7 @@ class TesteBaseDados {
     fun consegueApagarVacinas(){
         val db = getBdvacinasOpenHelper().writableDatabase
         val tabelaVacinas = getTabelaVacina(db);
-        val vacina = Vacina(nome = "?",quantidade = 0)
+        val vacina = Vacina(nome = "?")
 
         vacina.id = inserirVacina(tabelaVacinas, vacina)
 
@@ -168,7 +168,7 @@ class TesteBaseDados {
     fun consegueLerVacina(){
         val db = getBdvacinasOpenHelper().writableDatabase
         val tabelaVacina = getTabelaVacina(db)
-        val vacina = Vacina(nome="Moderna",quantidade = 300)
+        val vacina = Vacina(nome="Moderna")
 
         vacina.id = inserirVacina(tabelaVacina,vacina)
 
@@ -187,10 +187,14 @@ class TesteBaseDados {
         val tabelaPessoas = getTabelaPessoas(db)
 
 
-        val vacina = Vacina(nome="Moderna",quantidade = 300)
+        val vacina = Vacina(nome="Moderna")
         vacina.id=inserirVacina(tabelaVacina,vacina)
 
-        val  marcacoes = Marcacoes(dose1 = 0, checkdose1 = "?",dose2 = 0 ,checkdose2 = "?",idVacina = 0 ,idPessoa = 0)
+        val  marcacoes = Marcacoes(
+            datadose = Date(1989-1988,2,31),
+            numero_dose = ,
+            idVacina = 0 ,
+            idPessoa = 0)
 
 
         val pessoas = Pessoas(nome="Antonio",telefone = "92383248",dataNascimento = 10111993,email = "antonio@hotmail.com",morada = "rua do Fernando ",idmarcacao = marcacoes.id )

@@ -3,8 +3,11 @@ package com.example.projetofinalandroid
 import android.content.ContentValues
 import android.database.Cursor
 import android.provider.BaseColumns
+import java.util.*
 
-class Marcacoes(var id: Long = -1, var datadose: Int, var numero_dose: String,var idVacina: Long, var idPessoa : Long) {
+class Marcacoes(
+    var id: Long = -1, var datadose: Date, var numero_dose: String,
+    var idVacina: Long, var idPessoa: Long) {
     fun toContentValues(): ContentValues {
         val valores = ContentValues()
         valores.put(TabelaMarcacoes.CAMPO_DATA_DOSE, datadose)
@@ -26,12 +29,12 @@ class Marcacoes(var id: Long = -1, var datadose: Int, var numero_dose: String,va
 
 
             val id = cursor.getLong(colId)
-            val datadose = cursor.getInt(coldatadose)
+            val datadose = cursor.getLong(coldatadose)
             val numerodose = cursor.getString(colnumerodose)
             val vacina = cursor.getLong(colvacina)
             val pessoa = cursor.getLong(colpessoa)
 
-            return Marcacoes(id, datadose,numerodose,vacina,pessoa)
+            return Marcacoes(id, Date(datadose),numerodose,vacina,pessoa)
         }
     }
 }
