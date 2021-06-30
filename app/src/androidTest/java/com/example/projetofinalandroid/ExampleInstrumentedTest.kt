@@ -310,5 +310,72 @@ class TesteBaseDados {
         db.close()
     }
 
+    @Test
+    fun consegueInserirPessoas(){
+        val db = getBdMarcacoesOpenHelper().writableDatabase
+        val tabelaPessoas = getTabelaPessoas(db)
+        val pessoas = Pessoas(nome ="Aníbal Almeida", telefone = "+355 932978568", email = "almeida@gmail.com", morada = "Rua Vila de Trancoso, Guarda", dataNascimento = Date(1999-1900, 5,26))
+
+        pessoas.id = inserirPessoas(tabelaPessoas, pessoas)
+        val utenteBD = getPessoasBaseDados(tabelaPessoas, pessoas.id)
+        assertEquals(pessoas, utenteBD)
+        db.close()
+    }
+
+    @Test
+    fun consegueAlterarPessoas(){
+        val db = getBdMarcacoesOpenHelper().writableDatabase
+        val tabelaPessoas = getTabelaPessoas(db)
+        val pessoas = Pessoas(nome ="?", telefone = "?", email = "?", morada = "?", dataNascimento = Date())
+
+        pessoas.id = inserirPessoas(tabelaPessoas, pessoas)
+        pessoas.nome="Amilcar Sousa"
+        pessoas.telefone="+355 965734894"
+        pessoas.email="asousa@hotmai.com"
+        pessoas.morada="Rua da Fonte, Viseu"
+        pessoas.dataNascimento=  Date(1999-1900, 8,2)
+
+        val registosAlterados = tabelaPessoas.update(
+            pessoas.toContentValues(),
+            "${BaseColumns._ID}=?",
+            arrayOf(pessoas.id.toString())
+        )
+
+        assertEquals(1, registosAlterados)
+
+        db.close()
+    }
+
+    @Test
+    fun consegueApagarPessoas(){
+        val db = getBdMarcacoesOpenHelper().writableDatabase
+        val tabelaPessoas = getTabelaPessoas(db)
+        val pessoas = Pessoas(nome ="?", telefone = "?", email = "?", morada = "?", dataNascimento = Date())
+
+        pessoas.id = inserirPessoas(tabelaPessoas, pessoas)
+
+        val registosEliminados =tabelaPessoas.delete(
+            "${BaseColumns._ID}=?",
+            arrayOf(pessoas.id.toString())
+        )
+
+        assertEquals(1, registosEliminados)
+
+        db.close()
+    }
+
+    @Test
+    fun consegueLerUtentes(){
+        val db = getBdMarcacoesOpenHelper().writableDatabase
+        val tabelaUtentes = getTabelaPessoas(db)
+        val pessoas = Pessoas(nome ="Gonçalves", telefone = "+355 914369458", email = "g@hotmail.com", morada = "Rua dos Pinheiros, Braga",dataNascimento = Date(1999-1900, 5,26))
+
+        pessoas.id = inserirPessoas(tabelaUtentes, pessoas)
+
+        val utenteBD = getPessoasBaseDados(tabelaUtentes, pessoas.id)
+        assertEquals(pessoas, utenteBD)
+
+        db.close()
+    }
 
 }
