@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FirstFragment">
+    tools:context=".ListaMarcacoesFragment" >
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RecyclerViewVacina"
+        android:id="@+id/recyclerViewMarcacoes"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margem_formularios" />
 </FrameLayout>
