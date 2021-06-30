@@ -6,7 +6,7 @@ import android.provider.BaseColumns
 import java.util.*
 
 class Marcacoes(
-    var id: Long = -1, var datadose: Date, var numero_dose: String,
+    var id: Long = -1, var datadose: Date, var numero_dose: Int,
     var idVacina: Long, var idPessoa: Long) {
     fun toContentValues(): ContentValues {
         val valores = ContentValues()
@@ -30,7 +30,7 @@ class Marcacoes(
 
             val id = cursor.getLong(colId)
             val datadose = cursor.getLong(coldatadose)
-            val numerodose = cursor.getString(colnumerodose)
+            val numerodose = cursor.getInt(colnumerodose)
             val vacina = cursor.getLong(colvacina)
             val pessoa = cursor.getLong(colpessoa)
 
