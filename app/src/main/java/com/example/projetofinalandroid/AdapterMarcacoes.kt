@@ -43,6 +43,8 @@ class AdapterMarcacoes(val fragment: ListaMarcacoesFragment): RecyclerView.Adapt
         override fun onClick(v: View?) {
             selecionado?.desseleciona()
             seleciona()
+            DadosApp.marcacoesSelecionado
+            DadosApp.activity.atualizaMenuListaLivros(true)
 
         }
 

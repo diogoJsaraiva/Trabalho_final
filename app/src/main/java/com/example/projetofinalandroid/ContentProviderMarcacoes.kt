@@ -27,6 +27,7 @@ class ContentProviderMarcacoes   : ContentProvider(){
     ): Cursor? {
         val bd = bdArmazemVacinasOpenHelper!!.readableDatabase
 
+
         return when(getUriMatcher().match(uri)){
             URI_VACINA -> TabelaVacina(bd).query(
                     projection as Array<String>,
@@ -172,8 +173,8 @@ class ContentProviderMarcacoes   : ContentProvider(){
 
         private val ENDERECO_BASE = Uri.parse("content://$AUTHORITY")
         public val ENDERECO_VACINAS = Uri.withAppendedPath(ENDERECO_BASE, VACINA)
-        public val ENDERECO_UTENTES = Uri.withAppendedPath(ENDERECO_BASE, PESSOAS)
-        public val ENDERECO_DOSES = Uri.withAppendedPath(ENDERECO_BASE, MARCACAO)
+        public val ENDERECO_Pessoas = Uri.withAppendedPath(ENDERECO_BASE, PESSOAS)
+        public val ENDERECO_MARCACOES = Uri.withAppendedPath(ENDERECO_BASE, MARCACAO)
 
         private fun getUriMatcher() : UriMatcher {
             val uriMatcher = UriMatcher(UriMatcher.NO_MATCH)
