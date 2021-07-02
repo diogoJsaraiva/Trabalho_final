@@ -24,7 +24,9 @@ class ListaMarcacoesFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>
     ): View? {
         // Inflate the layout for this fragment
 
+        DadosApp.fragment = this
 
+        (activity as MainActivity).menuAtual = R.menu.menu_lista_marcacoes
 
         return inflater.inflate(R.layout.fragment_marcacoes_lista, container, false)
     }
@@ -39,7 +41,7 @@ class ListaMarcacoesFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>
 
         val loaderManager = LoaderManager.getInstance(this)
 
-        loaderManager.initLoader(ID_LOADER_MANAGER_LIVROS,null,this)
+        loaderManager.initLoader(ID_LOADER_MANAGER_MARCACOES,null,this)
 
     }
 
@@ -56,7 +58,7 @@ class ListaMarcacoesFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>
 
     fun processaOpcaoMenu(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.Marcacoes_novo -> {
+            R.id.action_novo_marcacao -> {
                 navegaNovaMarcacoes()
                 return true
             }
@@ -89,10 +91,10 @@ class ListaMarcacoesFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
         return CursorLoader(
                 requireContext(),
-                ContentProviderMarcacoes.ENDERECO_VACINAS,
-                TabelaVacina.TODOS_CAMPOS,
+                ContentProviderMarcacoes.ENDERECO_MARCACOES,
+                TabelaMarcacoes.TODOS_CAMPOS,
                 null,null,
-                TabelaVacina.NOME_TABELA
+                TabelaMarcacoes.NOME_TABELA
 
 
 
@@ -165,7 +167,7 @@ class ListaMarcacoesFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>
 
 
     companion object{
-        const val ID_LOADER_MANAGER_LIVROS = 0
+        const val ID_LOADER_MANAGER_MARCACOES = 0
     }
 
 
