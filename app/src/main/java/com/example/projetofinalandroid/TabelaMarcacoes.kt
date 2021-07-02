@@ -87,7 +87,7 @@ class TabelaMarcacoes(db: SQLiteDatabase) : BaseColumns  {
         const val CAMPO_NUMERO_DOSE = "numero_dose"
         const val CAMPO_ID_VACINA = "id_vacina"
 
-        
+
         const val CAMPO_ID_Vacina = "id_Vacina"
         const val CAMPO_EXTERNO_NOME_Vacina = "nome_Vacina"
 
