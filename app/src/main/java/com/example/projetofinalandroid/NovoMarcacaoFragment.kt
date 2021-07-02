@@ -24,8 +24,8 @@ class NovoMarcacaoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<Button>(R.id.button_second).setOnClickListener {
-            findNavController().navigate(R.id.NovaVacinaFragment_to_ListaVacinaFragment)
-        }
+        //view.findViewById<Button>(R.id.button_second).setOnClickListener {
+         //   findNavController().navigate(R.id.NovaVacinaFragment_to_ListaVacinaFragment)
+       // }
     }
 }

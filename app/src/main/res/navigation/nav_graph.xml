@@ -3,26 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/action_lista_vacinaFragment">
+    app:startDestination="@id/Lista_MarcacoesFragment">
 
     <fragment
-        android:id="@+id/action_lista_vacinaFragment"
-        android:name="com.example.projetofinalandroid.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-
+        android:id="@+id/Lista_MarcacoesFragment"
+        android:name="com.example.projetofinalandroid.ListaMarcacoesFragment"
+        tools:layout="@layout/fragment_marcacoes_lista">
         <action
-            android:id="@+id/ListaVacinaFragment_to_NovaVacinaFragment"
-            app:destination="@id/action_vacina_novo" />
+            android:id="@+id/action_lista_MarcacoesFragment_to_action_marcacoes_novo"
+            app:destination="@id/Marcacoes_novo" />
     </fragment>
     <fragment
-        android:id="@+id/action_marcacoes_novo"
+        android:id="@+id/Marcacoes_novo"
         android:name="com.example.projetofinalandroid.NovoMarcacaoFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_novo_marcacao">
-
         <action
-            android:id="@+id/NovaVacinaFragment_to_ListaVacinaFragment"
-            app:destination="@id/action_lista_vacinaFragment" />
+            android:id="@+id/action_marcacoes_novo_to_action_lista_MarcacoesFragment"
+            app:destination="@id/Lista_MarcacoesFragment" />
     </fragment>
 </navigation>

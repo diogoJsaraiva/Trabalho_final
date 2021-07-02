@@ -5,7 +5,7 @@ import android.database.Cursor
 import android.provider.BaseColumns
 import java.util.*
 
-class Marcacoes(
+data class Marcacoes(
     var id: Long = -1, var datadose: Date, var numero_dose: Int,
     var idVacina: Long, var idPessoa: Long) {
     fun toContentValues(): ContentValues {

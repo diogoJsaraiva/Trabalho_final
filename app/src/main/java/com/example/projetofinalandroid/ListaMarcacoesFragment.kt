@@ -44,7 +44,7 @@ class ListaMarcacoesFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>
     }
 
     fun navegaNovaMarcacoes(){
-        findNavController().navigate(R.id.ListaVacinaFragment_to_NovaVacinaFragment)
+        findNavController().navigate(R.id.action_lista_MarcacoesFragment_to_action_marcacoes_novo)
     }
     private fun navegaAlterarMarcacoes(){
 
@@ -56,20 +56,20 @@ class ListaMarcacoesFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>
 
     fun processaOpcaoMenu(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_marcacoes_novo -> {
+            R.id.Marcacoes_novo -> {
                 navegaNovaMarcacoes()
                 return true
             }
 
-            R.id.action_marcacoes_alterar-> {
-                navegaAlterarMarcacoes()
-                return true
-            }
+           //R.id.action_marcacoes_alterar-> {
+            //navegaAlterarMarcacoes()
+             //   return true
+            //}
 
-            R.id.action_marcacoes_eliminar -> {
-                navegaEliminarMarcacoes()
-                return true
-            }
+            //R.id.action_marcacoes_eliminar -> {
+              //  navegaEliminarMarcacoes()
+               // return true
+           // }
 
 
             else -> return false

@@ -36,7 +36,7 @@ class TabelaPessoas (db: SQLiteDatabase) : BaseColumns {
     }
 
     companion object{
-        const val NOME_TABELA = "pessoas"
+        const val NOME_TABELA = "Pessoas"
         const val CAMPO_NOME = "nome"
         const val CAMPO_TELEFONE = "telefone"
         const val CAMPO_EMAIL = "email"

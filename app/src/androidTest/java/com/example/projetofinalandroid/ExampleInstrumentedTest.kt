@@ -109,7 +109,7 @@ class TesteBaseDados {
    @Test
    fun consegueInserirVacina(){
        val db = getBdMarcacoesOpenHelper().writableDatabase
-       val tabelaVacina = getTabelaVacina(db);
+       val tabelaVacina = getTabelaVacina(db)
        val vacina = Vacina(nome="Pfizer")
 
        vacina.id = inserirVacina(tabelaVacina,vacina)
@@ -126,7 +126,7 @@ class TesteBaseDados {
     @Test
     fun consegueAlterarVacina(){
         val db = getBdMarcacoesOpenHelper().writableDatabase
-        val tabelaVacina = getTabelaVacina(db);
+        val tabelaVacina = getTabelaVacina(db)
         val vacina = Vacina(nome="?")
 
         vacina.id = inserirVacina(tabelaVacina,vacina)
@@ -140,8 +140,8 @@ class TesteBaseDados {
         )
 
         assertEquals(1, registosAlterados)
-        val VacinaBD = getVacinaBaseDados(tabelaVacina, vacina.id)
-        assertEquals(vacina, VacinaBD)
+        val vacinaBD = getVacinaBaseDados(tabelaVacina, vacina.id)
+        assertEquals(vacina, vacinaBD)
 
         db.close()
     }
@@ -149,7 +149,7 @@ class TesteBaseDados {
     @Test
     fun consegueApagarVacinas(){
         val db = getBdMarcacoesOpenHelper().writableDatabase
-        val tabelaVacinas = getTabelaVacina(db);
+        val tabelaVacinas = getTabelaVacina(db)
         val vacina = Vacina(nome = "?")
 
         vacina.id = inserirVacina(tabelaVacinas, vacina)
@@ -212,11 +212,11 @@ class TesteBaseDados {
     fun consegueAlterarMarcacoes(){
         val db = getBdMarcacoesOpenHelper().writableDatabase
         val tabelaPessoas = getTabelaPessoas(db)
-        val pessoas = Pessoas(nome ="Daniel Martins", telefone = "+355 962978568", email = "martins@gmail.com", morada = "Rua Vila de Trancso, Guarda", dataNascimento = Date(221-1988,7,10))
+        val pessoas = Pessoas(nome ="Rodrigo", telefone = "962978568", email = "rodas@gmail.com", morada = "Guarda", dataNascimento = Date(221-1988,7,10))
 
         pessoas.id = inserirPessoas(tabelaPessoas, pessoas)
 
-        val tabelaVacinas = getTabelaVacina(db);
+        val tabelaVacinas = getTabelaVacina(db)
         val vacina = Vacina(nome = "AsZeneca")
 
         vacina.id = inserirVacina(tabelaVacinas, vacina)
@@ -251,7 +251,7 @@ class TesteBaseDados {
 
         pessoas.id = inserirPessoas(tabelaUtente, pessoas)
 
-        val tabelaVacinas = getTabelaVacina(db);
+        val tabelaVacinas = getTabelaVacina(db)
         val vacina = Vacina(nome = "AstrZeneca")
 
         vacina.id = inserirVacina(tabelaVacinas, vacina)
@@ -284,11 +284,11 @@ class TesteBaseDados {
     fun consegueLerMarcacoes(){
         val db = getBdMarcacoesOpenHelper().writableDatabase
         val tabelaUtente = getTabelaPessoas(db)
-        val pessoas = Pessoas(nome ="Manuel Pereira", telefone = "+355 962978568", email = "almeda@gmail.com", morada = "Rua Sofia, Coimbra", dataNascimento = Date(1999-1988,3,31))
+        val pessoas = Pessoas(nome ="Manuel", telefone = "962978568", email = "manu@gmail.com", morada = "Rua Sofia, Coimbra", dataNascimento = Date(1999-1988,3,31))
 
         pessoas.id = inserirPessoas(tabelaUtente, pessoas)
 
-        val tabelaVacinas = getTabelaVacina(db);
+        val tabelaVacinas = getTabelaVacina(db)
         val vacina = Vacina(nome = "AstrZenca")
 
         vacina.id = inserirVacina(tabelaVacinas, vacina)
@@ -365,10 +365,10 @@ class TesteBaseDados {
     }
 
     @Test
-    fun consegueLerUtentes(){
+    fun consegueLerPessoas(){
         val db = getBdMarcacoesOpenHelper().writableDatabase
         val tabelaUtentes = getTabelaPessoas(db)
-        val pessoas = Pessoas(nome ="Gonçalves", telefone = "+355 914369458", email = "g@hotmail.com", morada = "Rua dos Pinheiros, Braga",dataNascimento = Date(1999-1900, 5,26))
+        val pessoas = Pessoas(nome ="Gonçalves", telefone = "914369458", email = "g@hotmail.com", morada = "Braga",dataNascimento = Date(1999-1900, 5,26))
 
         pessoas.id = inserirPessoas(tabelaUtentes, pessoas)
 
