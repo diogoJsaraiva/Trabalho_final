@@ -31,7 +31,7 @@
         android:layout_marginTop="@dimen/margem_campos"
         android:layout_marginEnd="@dimen/margem_campos"
         android:layout_marginRight="@dimen/margem_campos"
-        android:gravity="left|end"
+        android:gravity="start|end"
         android:textColor="@color/corDestaque"
         tools:text="aventura" />
 </LinearLayout>

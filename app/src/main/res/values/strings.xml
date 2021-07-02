@@ -16,4 +16,8 @@
     <string name="adicionarmarcacao">adicionarMarcacao</string>
     <string name="editarmarcacao">EditarMarcacao</string>
     <string name="eliminarmarcacao">EliminarMarcacao</string>
+    <string name="spinnerpessoa">spinnerPessoa</string>
+    <string name="Exemplo_Data">12/10/2000</string>
+    <string name="guardar">guardar</string>
+    <string name="cancelar">cancelar</string>
 </resources>
