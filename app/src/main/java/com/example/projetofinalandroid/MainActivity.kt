@@ -56,9 +56,9 @@ class MainActivity : AppCompatActivity() {
             }
             else -> when(menuAtual){
                 R.menu.menu_lista_marcacoes -> (DadosApp.fragment as ListaMarcacoesFragment).processaOpcaoMenu(item)
-                R.menu.menu_novo_livro ->  (DadosApp.fragment as NovoLivroFragment).processaOpcaoMenu(item)
-                R.menu.menu_novo_livro ->  (DadosApp.fragment as EditLivroFragment).processaOpcaoMenu(item)
-                R.menu.menu_elimina_livro ->  (DadosApp.fragment as Elimina_LivroFragment).processaOpcaoMenu(item)
+               R.menu.menu_novo_marcacoes ->  (DadosApp.fragment as NovoMarcacaoFragment).processaOpcaoMenu(item)
+                //R.menu.menu_novo_livro ->  (DadosApp.fragment as EditLivroFragment).processaOpcaoMenu(item)
+                //R.menu.menu_elimina_livro ->  (DadosApp.fragment as Elimina_LivroFragment).processaOpcaoMenu(item)
                 else -> false
             }
 
