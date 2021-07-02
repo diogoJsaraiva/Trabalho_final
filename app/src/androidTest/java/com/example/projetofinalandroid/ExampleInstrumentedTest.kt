@@ -94,7 +94,7 @@ class TesteBaseDados {
 
     @Before
     fun apagaBaseDados() {
-       getAppContext().deleteDatabase(BdMarcacoesOpenHelper.NOME_BASE_DADOS)
+       //getAppContext().deleteDatabase(BdMarcacoesOpenHelper.NOME_BASE_DADOS)
     }
 
     @Test
@@ -187,10 +187,10 @@ class TesteBaseDados {
         val tabelaMarcacoes = getTabelaMarcacoes(db)
 
         val pessoas = Pessoas(nome="Antonio",telefone = "92383248",dataNascimento = Date(1989-1988,2,31),email = "antonio@hotmail.com",morada = "rua do Fernando ")
-        pessoas.id=inserirPessoas(tabelaPessoas,pessoas)
+        pessoas.id = inserirPessoas(tabelaPessoas,pessoas)
 
         val vacina = Vacina(nome="Moderna")
-        vacina.id=inserirVacina(tabelaVacina,vacina)
+        vacina.id = inserirVacina(tabelaVacina,vacina)
 
         val  marcacoes = Marcacoes(
             datadose = Date(1989-1988,2,31),
