@@ -36,23 +36,31 @@ class ListaMarcacoesFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>
 
         val recyclerViewMarcacoes = view.findViewById<RecyclerView>(R.id.recyclerViewMarcacoes)
         adapterMarcacoes = AdapterMarcacoes(this)
+
         recyclerViewMarcacoes.adapter = adapterMarcacoes
         recyclerViewMarcacoes.layoutManager = LinearLayoutManager(requireContext())
 
-        val loaderManager = LoaderManager.getInstance(this)
 
-        loaderManager.initLoader(ID_LOADER_MANAGER_MARCACOES,null,this)
+
+        LoaderManager.getInstance(this)
+                .initLoader(ID_LOADER_MANAGER_MARCACOES, null, this)
 
     }
 
     fun navegaNovaMarcacoes(){
-        findNavController().navigate(R.id.action_lista_MarcacoesFragment_to_action_marcacoes_novo)
+        findNavController().navigate(R.id.lista_MarcacoesFragment_to_Marcacoes_novo)
     }
     private fun navegaAlterarMarcacoes(){
 
     }
 
     private fun navegaEliminarMarcacoes(){
+
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
 
     }
 
@@ -63,15 +71,15 @@ class ListaMarcacoesFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>
                 return true
             }
 
-           //R.id.action_marcacoes_alterar-> {
+            //R.id.action_marcacoes_alterar-> {
             //navegaAlterarMarcacoes()
-             //   return true
+            //   return true
             //}
 
             //R.id.action_marcacoes_eliminar -> {
-              //  navegaEliminarMarcacoes()
-               // return true
-           // }
+            //  navegaEliminarMarcacoes()
+            // return true
+            // }
 
 
             else -> return false

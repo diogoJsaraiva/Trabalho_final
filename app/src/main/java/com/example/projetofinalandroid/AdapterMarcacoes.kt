@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 
-class AdapterMarcacoes(val fragment: ListaMarcacoesFragment): RecyclerView.Adapter<AdapterMarcacoes.ViewHolderVacina>() {
+class AdapterMarcacoes(val fragment: ListaMarcacoesFragment): RecyclerView.Adapter<AdapterMarcacoes.ViewHolderMarcacao>() {
     public var cursor: Cursor? = null
         get() = field
         set(value) {
@@ -15,22 +15,31 @@ class AdapterMarcacoes(val fragment: ListaMarcacoesFragment): RecyclerView.Adapt
             notifyDataSetChanged()
         }
 
-    class ViewHolderVacina(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        private val textViewVacina = itemView.findViewById<TextView>(R.id.textViewVacina)
+    class ViewHolderMarcacao(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+        private val textViewData = itemView.findViewById<TextView>(R.id.textViewData)
+        private val textViewDose= itemView.findViewById<TextView>(R.id.textViewDose)
+        private val textViewidVacina= itemView.findViewById<TextView>(R.id.textViewVacina)
 
 
-        internal var vacina: Vacina? = null
+        private lateinit var  marcacoes: Marcacoes
 
 
         init {
             itemView.setOnClickListener(this)
         }
 
-        fun atualizaLivro(livro: Vacina) {
+        fun atualizaMarcacao(marcacoes: Marcacoes) {
+            this.marcacoes = marcacoes
 
-            this.vacina = livro
+            val dose = marcacoes.numero_dose.toString()
+            val data = marcacoes.datadose
+            val idVacina = marcacoes.idVacina
 
-            textViewVacina.text = livro.nome
+
+            textViewDose.text = "Dose: $dose"
+            textViewData.text = "Data: $data"
+            textViewidVacina.text = idVacina.toString()
+
 
         }
 
@@ -43,8 +52,7 @@ class AdapterMarcacoes(val fragment: ListaMarcacoesFragment): RecyclerView.Adapt
         override fun onClick(v: View?) {
             selecionado?.desseleciona()
             seleciona()
-            DadosApp.marcacoesSelecionado
-            DadosApp.activity.atualizaMenuListaLivros(true)
+
 
         }
 
@@ -52,20 +60,19 @@ class AdapterMarcacoes(val fragment: ListaMarcacoesFragment): RecyclerView.Adapt
         private fun seleciona() {
             selecionado = this
             itemView.setBackgroundResource(R.color.cor_selecao)
+            DadosApp.marcacoesSelecionado
+            DadosApp.activity.atualizaMenuListaLivros(true)
 
         }
 
         private fun desseleciona() {
+            selecionado = null
             itemView.setBackgroundResource(android.R.color.white)
         }
 
         companion object {
-            var selecionado: ViewHolderVacina? = null
+            var selecionado: ViewHolderMarcacao? = null
         }
-    }
-
-    companion object {
-        fun getVacinaSelecionado() = ViewHolderVacina.selecionado?.vacina
     }
 
 
@@ -92,9 +99,9 @@ class AdapterMarcacoes(val fragment: ListaMarcacoesFragment): RecyclerView.Adapt
      * @see .getItemViewType
      * @see .onBindViewHolder
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderVacina {
-        val itemVacina = fragment.layoutInflater.inflate(R.layout.item_marcacao, parent, false)
-        return ViewHolderVacina(itemVacina)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderMarcacao {
+        val itemMarcacao = fragment.layoutInflater.inflate(R.layout.item_marcacao, parent, false)
+        return ViewHolderMarcacao(itemMarcacao)
     }
 
     /**
@@ -118,9 +125,9 @@ class AdapterMarcacoes(val fragment: ListaMarcacoesFragment): RecyclerView.Adapt
      * item at the given position in the data set.
      * @param position The position of the item within the adapter's data set.
      */
-    override fun onBindViewHolder(holder: ViewHolderVacina, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolderMarcacao, position: Int) {
         cursor!!.moveToPosition(position)
-        holder.atualizaLivro(Vacina.fromCursor(cursor!!))
+        holder.atualizaMarcacao(Marcacoes.fromCursor(cursor!!))
     }
 
     /**

@@ -32,7 +32,7 @@ class TabelaVacina(db: SQLiteDatabase) : BaseColumns  {
         having: String?,
         orderBy: String?
     ): Cursor? {
-        return db.query(TabelaPessoas.NOME_TABELA, columns, selection, selectionArgs, groupBy, having, orderBy)
+        return db.query(NOME_TABELA, columns, selection, selectionArgs, groupBy, having, orderBy)
     }
 
     //CRUD

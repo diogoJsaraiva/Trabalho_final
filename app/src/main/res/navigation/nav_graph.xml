@@ -10,7 +10,7 @@
         android:name="com.example.projetofinalandroid.ListaMarcacoesFragment"
         tools:layout="@layout/fragment_marcacoes_lista">
         <action
-            android:id="@+id/action_lista_MarcacoesFragment_to_action_marcacoes_novo"
+            android:id="@+id/lista_MarcacoesFragment_to_Marcacoes_novo"
             app:destination="@id/Marcacoes_novo" />
     </fragment>
     <fragment

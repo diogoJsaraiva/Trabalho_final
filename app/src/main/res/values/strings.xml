@@ -20,4 +20,5 @@
     <string name="Exemplo_Data">12/10/2000</string>
     <string name="guardar">guardar</string>
     <string name="cancelar">cancelar</string>
+    <string name="qual_o_numero_da_dose">Qual o numero da dose</string>
 </resources>

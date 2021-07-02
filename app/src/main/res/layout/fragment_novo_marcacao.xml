@@ -16,15 +16,6 @@
         android:layout_marginRight="@dimen/margem_campos"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/editTextDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/Exemplo_Data"
-            android:inputType="date" />
-
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -34,7 +25,7 @@
                 android:id="@+id/editTextDose"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/numero_dose"
+                android:hint="@string/qual_o_numero_da_dose"
                 android:inputType="number|textPersonName" />
 
             <TextView
@@ -50,18 +41,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margem_campos" />
 
-            <TextView
-                android:id="@+id/textView2"
+            <CalendarView
+                android:id="@+id/calendarData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margem_campos"
-                android:hint="@string/spinnerpessoa" />
-
-            <Spinner
-                android:id="@+id/spinnerPessoa"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margem_campos" />
+                android:layout_margin="@dimen/margem_campos"
+                android:layout_weight="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
     </com.google.android.material.textfield.TextInputLayout>

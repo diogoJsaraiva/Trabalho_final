@@ -2,51 +2,65 @@ package com.example.projetofinalandroid
 
 import android.database.Cursor
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.Fragment
+import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import java.util.*
+
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
-class NovoMarcacaoFragment : Fragment() {
+class NovoMarcacaoFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
 
-    private  lateinit var  editTextData: EditText
+
+
+    private  lateinit var  calendarData: Calendar
     private  lateinit var  editTextDose: EditText
-    private  lateinit var  spinnerPessoa: Spinner
     private  lateinit var  spinnerVacina: Spinner
 
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+            savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
         DadosApp.fragment = this
         (activity as MainActivity).menuAtual = R.menu.menu_novo_marcacoes
+
         return inflater.inflate(R.layout.fragment_novo_marcacao, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        editTextData = view.findViewById<EditText>(R.id.editTextDate)
+
+        calendarData = view.findViewById(R.id.calendarData)
         editTextDose = view.findViewById<EditText>(R.id.editTextDose)
+        spinnerVacina = view.findViewById<Spinner>(R.id.spinnerVacina)
 
+        LoaderManager.getInstance(this)
+                .initLoader(ID_LOADER_MANAGER_MARCACAO, null, this)
 
-        loaderManager.initLoader(NovoMarcacaoFragment.ID_LOADER_MANAGER_PESSOAS,null,this)
 
         //view.findViewById<Button>(R.id.button_second).setOnClickListener {
-         //   findNavController().navigate(R.id.NovaVacinaFragment_to_ListaVacinaFragment)
-       // }
+        //   findNavController().navigate(R.id.NovaVacinaFragment_to_ListaVacinaFragment)
+        // }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+    }
+
     fun processaOpcaoMenu(item: MenuItem):Boolean{
         when(item.itemId) {
             R.id.action_guardar_novo_marcacao -> guarda()
@@ -67,30 +81,28 @@ class NovoMarcacaoFragment : Fragment() {
             return
         }
 
-        val data = editTextData.text.toString()
-        if(data.isEmpty()){
-            editTextData.setError("Preencha a data")
-            editTextData.requestFocus()
-            return
-        }
+        val data = calendarData as DatePicker
 
-        val pessoas =  spinnerPessoa.selectedItemId
+        val day = data.dayOfMonth
+        val month = data.month + 1
+        val year = data.year
+
         val vacina =  spinnerVacina.selectedItemId
 
-        val livro = Marcacoes(datadose = dose, numero_dose = dose.toInt(),idPessoa = pessoas,idVacina = vacina )
+        val marcacoes = Marcacoes(datadose = Date(year,month,day), numero_dose = dose.toInt(), idVacina = vacina)
 
         val uri = activity?.contentResolver?.insert(
                 ContentProviderMarcacoes.ENDERECO_MARCACOES,
-                livro.toContentValues()
+                marcacoes.toContentValues()
 
         )
 
         if(uri == null ){
-            Snackbar.make(editTextDose,"Erro ao alterar marcacoa", Snackbar.LENGTH_INDEFINITE).show()
+            Snackbar.make(editTextDose, "Erro ao alterar marcacao", Snackbar.LENGTH_INDEFINITE).show()
         }else{
             findNavController().navigate(R.id.action_marcacoes_novo_to_action_lista_MarcacoesFragment)
         }
-        Toast.makeText(requireContext(),"Marcacao alterar com sucesso", Toast.LENGTH_LONG).show()
+        Toast.makeText(requireContext(), "Marcacao alterar com sucesso", Toast.LENGTH_LONG).show()
     }
 
 
@@ -114,13 +126,13 @@ class NovoMarcacaoFragment : Fragment() {
                 requireContext(),
                 ContentProviderMarcacoes.ENDERECO_Pessoas,
                 TabelaPessoas.TODOS_CAMPOS,
-                null,null,
+                null, null,
                 TabelaPessoas.CAMPO_NOME
-
 
 
         )
     }
+
 
     /**
      * Called when a previously created loader has finished its load.  Note
@@ -167,8 +179,8 @@ class NovoMarcacaoFragment : Fragment() {
      */
     override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
         atualizaSpinnerPessoas(data)
-        atualizaSpinnerVacina(data)
     }
+
 
 
 
@@ -184,22 +196,10 @@ class NovoMarcacaoFragment : Fragment() {
      */
     override fun onLoaderReset(loader: Loader<Cursor>) {
         atualizaSpinnerPessoas(null)
+
     }
+
     private fun atualizaSpinnerPessoas(data: Cursor?) {
-        spinnerPessoa.adapter = SimpleCursorAdapter(
-                requireContext(),
-                android.R.layout.simple_list_item_1,
-                data,
-                arrayOf(TabelaPessoas.CAMPO_NOME),
-                intArrayOf(android.R.id.text1),
-                0
-
-
-        )
-
-    }
-
-    private fun atualizaSpinnerVacina(data: Cursor?) {
         spinnerVacina.adapter = SimpleCursorAdapter(
                 requireContext(),
                 android.R.layout.simple_list_item_1,
@@ -213,8 +213,10 @@ class NovoMarcacaoFragment : Fragment() {
 
     }
 
+
+
     companion object{
-        const val ID_LOADER_MANAGER_PESSOAS= 0
-        const val ID_LOADER_MANAGER_Vacina = 0
+        const val ID_LOADER_MANAGER_MARCACAO= 0
+
     }
 }

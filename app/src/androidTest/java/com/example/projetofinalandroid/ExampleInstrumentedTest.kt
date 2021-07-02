@@ -75,7 +75,7 @@ class TesteBaseDados {
     }
 
 
-    private fun getMarcacoesBaseDados(tabelaMarcacoes: TabelaMarcacoes , id:Long): Pessoas {
+    private fun getMarcacoesBaseDados(tabelaMarcacoes: TabelaMarcacoes , id:Long): Marcacoes {
 
         val cursor = tabelaMarcacoes.query(
                 TabelaMarcacoes.TODOS_CAMPOS,
@@ -86,7 +86,7 @@ class TesteBaseDados {
         assertNotNull(cursor)
         assert(cursor!!.moveToNext())
 
-        return Pessoas.fromCursor(cursor)
+        return Marcacoes.fromCursor(cursor)
     }
 
 
@@ -94,7 +94,7 @@ class TesteBaseDados {
 
     @Before
     fun apagaBaseDados() {
-       //getAppContext().deleteDatabase(BdMarcacoesOpenHelper.NOME_BASE_DADOS)
+       getAppContext().deleteDatabase(BdMarcacoesOpenHelper.NOME_BASE_DADOS)
     }
 
     @Test
@@ -182,28 +182,25 @@ class TesteBaseDados {
     @Test
     fun consegueInserirMarcacoes(){
         val db = getBdMarcacoesOpenHelper().writableDatabase
-        val tabelaPessoas = getTabelaPessoas(db)
         val tabelaVacina = getTabelaVacina(db)
         val tabelaMarcacoes = getTabelaMarcacoes(db)
 
-        val pessoas = Pessoas(nome="Antonio",telefone = "92383248",dataNascimento = Date(1989-1988,2,31),email = "antonio@hotmail.com",morada = "rua do Fernando ")
-        pessoas.id = inserirPessoas(tabelaPessoas,pessoas)
+
 
         val vacina = Vacina(nome="Moderna")
         vacina.id = inserirVacina(tabelaVacina,vacina)
 
         val  marcacoes = Marcacoes(
-            datadose = Date(1989-1988,2,31),
+            datadose =  Date(1989 + 1900,2 ,31),
             numero_dose = 1,
-            idVacina = pessoas.id ,
-            idPessoa = vacina.id
-        )
+            idVacina = vacina.id ,
 
+        )
+        marcacoes.nomeVacina = vacina.nome
         marcacoes.id = inserirMarcacoes(tabelaMarcacoes,marcacoes)
 
-        val marcacoesBD = getMarcacoesBaseDados(tabelaMarcacoes,marcacoes.id)
 
-        assertEquals(marcacoes, marcacoesBD)
+        assertEquals(marcacoes, getMarcacoesBaseDados(tabelaMarcacoes,marcacoes.id))
 
         db.close()
     }
@@ -211,10 +208,7 @@ class TesteBaseDados {
     @Test
     fun consegueAlterarMarcacoes(){
         val db = getBdMarcacoesOpenHelper().writableDatabase
-        val tabelaPessoas = getTabelaPessoas(db)
-        val pessoas = Pessoas(nome ="Rodrigo", telefone = "962978568", email = "rodas@gmail.com", morada = "Guarda", dataNascimento = Date(221-1988,7,10))
 
-        pessoas.id = inserirPessoas(tabelaPessoas, pessoas)
 
         val tabelaVacinas = getTabelaVacina(db)
         val vacina = Vacina(nome = "AsZeneca")
@@ -224,13 +218,19 @@ class TesteBaseDados {
 
         val tabelaMarcacoes = getTabelaMarcacoes(db)
          val  marcacoes = Marcacoes(
-            datadose = Date(2021-1988,7,10),
+            datadose = Date(2021-1900,7,10),
             numero_dose = 2,
-            idVacina = pessoas.id ,
-            idPessoa = vacina.id
+            idVacina = vacina.id,
+                 nomeVacina = vacina.nome
         )
 
         marcacoes.id = inserirMarcacoes(tabelaMarcacoes, marcacoes)
+        marcacoes.datadose= Date(2021-1900,7,10)
+        marcacoes.numero_dose= 2
+        marcacoes.idVacina = vacina.id
+        marcacoes.nomeVacina = vacina.nome
+
+
 
         val registosAlterados = tabelaMarcacoes.update(
             marcacoes.toContentValues(),
@@ -246,10 +246,8 @@ class TesteBaseDados {
     @Test
     fun consegueApagarMarcacoes(){
         val db = getBdMarcacoesOpenHelper().writableDatabase
-        val tabelaUtente = getTabelaPessoas(db)
-        val pessoas = Pessoas(nome = "Antonio",telefone = "92383248",dataNascimento = Date(1989-1988,2,31),email = "antonio@hotmail.com",morada = "rua do Fernando ")
 
-        pessoas.id = inserirPessoas(tabelaUtente, pessoas)
+
 
         val tabelaVacinas = getTabelaVacina(db)
         val vacina = Vacina(nome = "AstrZeneca")
@@ -261,13 +259,12 @@ class TesteBaseDados {
         val marcacoes = Marcacoes(
             datadose = Date(2021-1988,7,10),
             numero_dose = 0,
-            idVacina = pessoas.id ,
-            idPessoa = vacina.id
+            idVacina = vacina.id ,
+                nomeVacina = vacina.nome
         )
         marcacoes.id = inserirMarcacoes(tabelaMarcacoes, marcacoes)
 
 
-        marcacoes.numero_dose= 1
 
         val registosEliminados =tabelaMarcacoes.delete(
             "${BaseColumns._ID}=?",
@@ -283,10 +280,6 @@ class TesteBaseDados {
     @Test
     fun consegueLerMarcacoes(){
         val db = getBdMarcacoesOpenHelper().writableDatabase
-        val tabelaUtente = getTabelaPessoas(db)
-        val pessoas = Pessoas(nome ="Manuel", telefone = "962978568", email = "manu@gmail.com", morada = "Rua Sofia, Coimbra", dataNascimento = Date(1999-1988,3,31))
-
-        pessoas.id = inserirPessoas(tabelaUtente, pessoas)
 
         val tabelaVacinas = getTabelaVacina(db)
         val vacina = Vacina(nome = "AstrZenca")
@@ -298,8 +291,9 @@ class TesteBaseDados {
         val marcacoes = Marcacoes(
             datadose = Date(2021-1988,7,10),
             numero_dose = 2,
-            idVacina = pessoas.id ,
-            idPessoa = vacina.id
+            idVacina = vacina.id,
+                nomeVacina = vacina.nome
+
         )
 
         marcacoes.id = inserirMarcacoes(tabelaMarcacoes, marcacoes)
