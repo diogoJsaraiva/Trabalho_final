@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        val processado = when (item.itemId) {
+        val opcaoProcessada = when (item.itemId) {
             R.id.action_settings ->{
                 Toast.makeText(this, "Marcacoes v.1.0", Toast.LENGTH_LONG).show()
                 true
@@ -62,11 +62,12 @@ class MainActivity : AppCompatActivity() {
 
 
         }
-        return if (processado) true else super.onOptionsItemSelected(item)
+        return if (opcaoProcessada) true else super.onOptionsItemSelected(item)
     }
 
 
     public fun atualizaMenuListaLivros(permiteAlterarEliminar : Boolean) {
+
         menu.findItem(R.id.action_alterar_marcacao).setVisible(permiteAlterarEliminar)
         menu.findItem(R.id.action_eliminar_marcacao).setVisible(permiteAlterarEliminar)
         //invalidateOptionsMenu()

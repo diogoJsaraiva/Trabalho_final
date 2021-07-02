@@ -43,10 +43,10 @@ class NovoMarcacaoFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
         super.onViewCreated(view, savedInstanceState)
 
 
-        calendarData = view.findViewById(R.id.calendarData)
+
         editTextDose = view.findViewById<EditText>(R.id.editTextDose)
         spinnerVacina = view.findViewById<Spinner>(R.id.spinnerVacina)
-
+        calendarData = view.findViewById(R.id.calendarData)
         LoaderManager.getInstance(this)
                 .initLoader(ID_LOADER_MANAGER_MARCACAO, null, this)
 
@@ -56,10 +56,7 @@ class NovoMarcacaoFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
         // }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
 
-    }
 
     fun processaOpcaoMenu(item: MenuItem):Boolean{
         when(item.itemId) {

@@ -9,10 +9,10 @@ import android.net.Uri
 import android.provider.BaseColumns
 
 class ContentProviderMarcacoes   : ContentProvider(){
-    private var bdArmazemVacinasOpenHelper : BdMarcacoesOpenHelper? = null
+    private var bdMarcacoesOpenHelper : BdMarcacoesOpenHelper? = null
 
     override fun onCreate(): Boolean {
-        bdArmazemVacinasOpenHelper = BdMarcacoesOpenHelper(context)
+        bdMarcacoesOpenHelper = BdMarcacoesOpenHelper(context)
 
 
         return true
@@ -25,7 +25,7 @@ class ContentProviderMarcacoes   : ContentProvider(){
             selectionArgs: Array<out String>?,
             sortOrder: String?
     ): Cursor? {
-        val bd = bdArmazemVacinasOpenHelper!!.readableDatabase
+        val bd = bdMarcacoesOpenHelper!!.readableDatabase
 
 
         return when(getUriMatcher().match(uri)){
@@ -94,7 +94,7 @@ class ContentProviderMarcacoes   : ContentProvider(){
     }
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
-        val bd = bdArmazemVacinasOpenHelper!!.writableDatabase
+        val bd = bdMarcacoesOpenHelper!!.writableDatabase
 
         val id = when(getUriMatcher().match(uri)){
             URI_VACINA -> TabelaVacina(bd).insert(values!!)
@@ -108,7 +108,7 @@ class ContentProviderMarcacoes   : ContentProvider(){
     }
 
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<out String>?): Int {
-        val bd = bdArmazemVacinasOpenHelper!!.writableDatabase
+        val bd = bdMarcacoesOpenHelper!!.writableDatabase
 
         return when(getUriMatcher().match(uri)){
             URI_VACINA_ESPECIFICO -> TabelaVacina(bd).delete(
@@ -133,7 +133,7 @@ class ContentProviderMarcacoes   : ContentProvider(){
             selection: String?,
             selectionArgs: Array<out String>?
     ): Int {
-        val bd = bdArmazemVacinasOpenHelper!!.writableDatabase
+        val bd = bdMarcacoesOpenHelper!!.writableDatabase
 
         return when(getUriMatcher().match(uri)){
             URI_VACINA_ESPECIFICO -> TabelaVacina(bd).update(
@@ -156,7 +156,7 @@ class ContentProviderMarcacoes   : ContentProvider(){
     }
 
     companion object{
-        private const val AUTHORITY = "pt.ipg.trabalhofinal"
+        private const val AUTHORITY = "com.example.projetofinalandroid"
         private const val VACINA = "vacina"
         private const val PESSOAS = "pessoas"
         private const val MARCACAO = "marcacao"
