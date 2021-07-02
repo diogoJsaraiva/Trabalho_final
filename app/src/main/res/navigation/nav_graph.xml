@@ -12,6 +12,9 @@
         <action
             android:id="@+id/lista_MarcacoesFragment_to_Marcacoes_novo"
             app:destination="@id/Marcacoes_novo" />
+        <action
+            android:id="@+id/action_Lista_MarcacoesFragment_to_alteraMarcacaoFragment"
+            app:destination="@id/alteraMarcacaoFragment" />
     </fragment>
     <fragment
         android:id="@+id/Marcacoes_novo"
@@ -20,6 +23,15 @@
         tools:layout="@layout/fragment_novo_marcacao">
         <action
             android:id="@+id/action_marcacoes_novo_to_action_lista_MarcacoesFragment"
+            app:destination="@id/Lista_MarcacoesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/alteraMarcacaoFragment"
+        android:name="com.example.projetofinalandroid.AlteraMarcacaoFragment"
+        android:label="fragment_altera_marcacao"
+        tools:layout="@layout/fragment_altera_marcacao" >
+        <action
+            android:id="@+id/action_alteraMarcacaoFragment_to_Lista_MarcacoesFragment"
             app:destination="@id/Lista_MarcacoesFragment" />
     </fragment>
 </navigation>

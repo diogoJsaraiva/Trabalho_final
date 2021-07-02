@@ -51,7 +51,7 @@ class ListaMarcacoesFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>
         findNavController().navigate(R.id.lista_MarcacoesFragment_to_Marcacoes_novo)
     }
     private fun navegaAlterarMarcacoes(){
-
+        findNavController().navigate(R.id.action_Lista_MarcacoesFragment_to_alteraMarcacaoFragment)
     }
 
     private fun navegaEliminarMarcacoes(){
@@ -71,10 +71,10 @@ class ListaMarcacoesFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>
                 return true
             }
 
-            //R.id.action_marcacoes_alterar-> {
-            //navegaAlterarMarcacoes()
-            //   return true
-            //}
+            R.id.action_alterar_marcacao-> {
+            navegaAlterarMarcacoes()
+               return true
+            }
 
             //R.id.action_marcacoes_eliminar -> {
             //  navegaEliminarMarcacoes()

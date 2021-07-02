@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
+        findViewById<FloatingActionButton>(R.id.nav_host_fragment_container).setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
             else -> when(menuAtual){
                 R.menu.menu_lista_marcacoes -> (DadosApp.fragment as ListaMarcacoesFragment).processaOpcaoMenu(item)
                R.menu.menu_novo_marcacoes ->  (DadosApp.fragment as NovoMarcacaoFragment).processaOpcaoMenu(item)
-                //R.menu.menu_novo_livro ->  (DadosApp.fragment as EditLivroFragment).processaOpcaoMenu(item)
+                R.menu.menu_alterar_marcacao ->  (DadosApp.fragment as AlteraMarcacaoFragment).processaOpcaoMenu(item)
                 //R.menu.menu_elimina_livro ->  (DadosApp.fragment as Elimina_LivroFragment).processaOpcaoMenu(item)
                 else -> false
             }
