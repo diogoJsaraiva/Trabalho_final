@@ -13,6 +13,9 @@ import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import java.io.DataInput
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -23,14 +26,14 @@ class NovoMarcacaoFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
 
 
 
-    private  lateinit var  calendarData: Calendar
+    private  lateinit var  viewCalendar: CalendarView
     private  lateinit var  editTextDose: EditText
     private  lateinit var  spinnerVacina: Spinner
 
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?,
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
         DadosApp.fragment = this
@@ -44,9 +47,11 @@ class NovoMarcacaoFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
 
 
 
-        editTextDose = view.findViewById<EditText>(R.id.editTextDose)
-        spinnerVacina = view.findViewById<Spinner>(R.id.spinnerVacina)
-        calendarData = view.findViewById(R.id.calendarData)
+
+        editTextDose = view.findViewById(R.id.editTextDose)
+        spinnerVacina = view.findViewById(R.id.spinnerVacina)
+         viewCalendar = view.findViewById(R.id.calendarData)
+
         LoaderManager.getInstance(this)
                 .initLoader(ID_LOADER_MANAGER_MARCACAO, null, this)
 
@@ -78,19 +83,27 @@ class NovoMarcacaoFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
             return
         }
 
-        val data = calendarData as DatePicker
 
-        val day = data.dayOfMonth
-        val month = data.month + 1
-        val year = data.year
+        val data =  viewCalendar as Calendar
+       val  dia =  data.get(Calendar.DAY_OF_WEEK)
+        val  mes =  data.get(Calendar.MONTH)
+        val  ano =  data.get(Calendar.YEAR)
+
+
+
+
 
         val vacina =  spinnerVacina.selectedItemId
 
-        val marcacoes = Marcacoes(datadose = Date(year,month,day), numero_dose = dose.toInt(), idVacina = vacina)
+        val marcacoes = Marcacoes(
+            datadose = Date(ano - 1900,mes +1 ,dia),
+            numero_dose = dose.toInt(),
+            idVacina = vacina
+        )
 
         val uri = activity?.contentResolver?.insert(
-                ContentProviderMarcacoes.ENDERECO_MARCACOES,
-                marcacoes.toContentValues()
+            ContentProviderMarcacoes.ENDERECO_MARCACOES,
+            marcacoes.toContentValues()
 
         )
 
@@ -120,11 +133,11 @@ class NovoMarcacaoFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
      */
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
         return CursorLoader(
-                requireContext(),
-                ContentProviderMarcacoes.ENDERECO_Pessoas,
-                TabelaPessoas.TODOS_CAMPOS,
-                null, null,
-                TabelaPessoas.CAMPO_NOME
+            requireContext(),
+            ContentProviderMarcacoes.ENDERECO_Pessoas,
+            TabelaPessoas.TODOS_CAMPOS,
+            null, null,
+            TabelaPessoas.CAMPO_NOME
 
 
         )
@@ -198,12 +211,12 @@ class NovoMarcacaoFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
 
     private fun atualizaSpinnerPessoas(data: Cursor?) {
         spinnerVacina.adapter = SimpleCursorAdapter(
-                requireContext(),
-                android.R.layout.simple_list_item_1,
-                data,
-                arrayOf(TabelaVacina.CAMPO_NOME),
-                intArrayOf(android.R.id.text1),
-                0
+            requireContext(),
+            android.R.layout.simple_list_item_1,
+            data,
+            arrayOf(TabelaVacina.CAMPO_NOME),
+            intArrayOf(android.R.id.text1),
+            0
 
 
         )
