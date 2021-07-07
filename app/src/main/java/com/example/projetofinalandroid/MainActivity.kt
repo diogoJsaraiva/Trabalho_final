@@ -1,8 +1,6 @@
 package com.example.projetofinalandroid
 
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -12,7 +10,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private lateinit var menu: Menu
-    var menuAtual = R.menu.menu_lista_marcacoes
+    var menuAtual = R.menu.menu_lista_pessoas
         set(value){
 
             field = value
@@ -35,8 +33,8 @@ class MainActivity : AppCompatActivity() {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(menuAtual, menu)
         this.menu = menu
-        if(menuAtual == R.menu.menu_lista_marcacoes) {
-            atualizaMenuListaLivros(false)
+        if(menuAtual == R.menu.menu_lista_pessoas) {
+            atualizaMenuListaPessoas(false)
         }
 
         return true
@@ -48,14 +46,14 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         val opcaoProcessada = when (item.itemId) {
             R.id.action_settings ->{
-                Toast.makeText(this, "Marcacoes v.1.0", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "PEssoas v.1.0", Toast.LENGTH_LONG).show()
                 true
             }
             else -> when(menuAtual){
-                R.menu.menu_lista_marcacoes -> (DadosApp.fragment as ListaMarcacoesFragment).processaOpcaoMenu(item)
-               R.menu.menu_novo_marcacoes ->  (DadosApp.fragment as NovoMarcacaoFragment).processaOpcaoMenu(item)
-                R.menu.menu_alterar_marcacao ->  (DadosApp.fragment as AlteraMarcacaoFragment).processaOpcaoMenu(item)
-                //R.menu.menu_elimina_livro ->  (DadosApp.fragment as Elimina_LivroFragment).processaOpcaoMenu(item)
+                R.menu.menu_lista_pessoas -> (DadosApp.fragment as ListaPessoasFragment).processaOpcaoMenu(item)
+               R.menu.menu_novo_pessoas ->  (DadosApp.fragment as NovaPessoaFragment).processaOpcaoMenu(item)
+                R.menu.menu_altera_pessoas ->  (DadosApp.fragment as EditaPessoaFragment).processaOpcaoMenu(item)
+                R.menu.menu_elimina_pessoas ->  (DadosApp.fragment as EliminaPessoaFragment).processaOpcaoMenu(item)
                 else -> false
             }
 
@@ -66,10 +64,10 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    public fun atualizaMenuListaLivros(permiteAlterarEliminar : Boolean) {
+    fun atualizaMenuListaPessoas(permiteAlterarEliminar : Boolean) {
 
-        menu.findItem(R.id.action_alterar_marcacao).setVisible(permiteAlterarEliminar)
-        menu.findItem(R.id.action_eliminar_marcacao).setVisible(permiteAlterarEliminar)
+        menu.findItem(R.id.action_editar_pessoa).setVisible(permiteAlterarEliminar)
+        menu.findItem(R.id.action_eliminar_Pessoa).setVisible(permiteAlterarEliminar)
         //invalidateOptionsMenu()
     }
 
