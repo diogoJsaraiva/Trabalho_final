@@ -1,13 +1,13 @@
 package com.example.projetofinalandroid
-
 import android.database.Cursor
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import java.util.*
 
 
-class AdapterMarcacoes(val fragment: ListaMarcacoesFragment): RecyclerView.Adapter<AdapterMarcacoes.ViewHolderMarcacao>() {
+class AdapterPesspas(val fragment: ListaPessoasFragment) : RecyclerView.Adapter<AdapterPesspas.ViewHolderPessoas>() {
     public var cursor: Cursor? = null
         get() = field
         set(value) {
@@ -15,34 +15,28 @@ class AdapterMarcacoes(val fragment: ListaMarcacoesFragment): RecyclerView.Adapt
             notifyDataSetChanged()
         }
 
-    class ViewHolderMarcacao(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        private val textViewData = itemView.findViewById<TextView>(R.id.textViewData)
-        private val textViewDose= itemView.findViewById<TextView>(R.id.textViewDose)
-        private val textViewidVacina= itemView.findViewById<TextView>(R.id.textViewVacina)
-
-
-        private lateinit var  marcacoes: Marcacoes
-
+    class ViewHolderPessoas(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+        private val textViewNome = itemView.findViewById<TextView>(R.id.textViewNome)
+        private val textViewDose = itemView.findViewById<TextView>(R.id.textViewDose)
+        private val textViewIdade = itemView.findViewById<TextView>(R.id.textViewIdade)
+        private val textViewTelefone = itemView.findViewById<TextView>(R.id.textViewTelefone)
+        private lateinit var pessoas: Pessoas
 
         init {
             itemView.setOnClickListener(this)
         }
 
-        fun atualizaMarcacao(marcacoes: Marcacoes) {
-            this.marcacoes = marcacoes
+        fun atualizaUtente(pessoas: Pessoas) {
+            this.pessoas = pessoas
+            val dose = pessoas.dose.toString()
+            val idade =  pessoas.dataNascimento
+            val telefone = pessoas.telefone
 
-            val dose = marcacoes.numero_dose.toString()
-            val data = marcacoes.datadose
-            val idVacina = marcacoes.idVacina
-
-
+            textViewNome.text = pessoas.nome
             textViewDose.text = "Dose: $dose"
-            textViewData.text = "Data: $data"
-            textViewidVacina.text = idVacina.toString()
-
-
+            textViewIdade.text = "Idade: $idade"
+            textViewTelefone.text = "Telefone: $telefone"
         }
-
 
         /**
          * Called when a view has been clicked.
@@ -50,31 +44,28 @@ class AdapterMarcacoes(val fragment: ListaMarcacoesFragment): RecyclerView.Adapt
          * @param v The view that was clicked.
          */
         override fun onClick(v: View?) {
-            selecionado?.desseleciona()
+            selecionado?.desSeleciona()
             seleciona()
-
-
         }
-
 
         private fun seleciona() {
             selecionado = this
             itemView.setBackgroundResource(R.color.cor_selecao)
-            DadosApp.marcacoesSelecionado
-            DadosApp.activity.atualizaMenuListaLivros(true)
-
+            DadosApp.pessoasSelecionado = pessoas
+            DadosApp.activity.atualizaMenuListaPessoas(true)
         }
 
-        private fun desseleciona() {
+        private fun desSeleciona() {
             selecionado = null
             itemView.setBackgroundResource(android.R.color.white)
         }
 
+
+
         companion object {
-            var selecionado: ViewHolderMarcacao? = null
+            var selecionado : ViewHolderPessoas? = null
         }
     }
-
 
     /**
      * Called when RecyclerView needs a new [ViewHolder] of the given type to represent
@@ -99,9 +90,10 @@ class AdapterMarcacoes(val fragment: ListaMarcacoesFragment): RecyclerView.Adapt
      * @see .getItemViewType
      * @see .onBindViewHolder
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderMarcacao {
-        val itemMarcacao = fragment.layoutInflater.inflate(R.layout.item_marcacao, parent, false)
-        return ViewHolderMarcacao(itemMarcacao)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderPessoas {
+        val itemPessoas = fragment.layoutInflater.inflate(R.layout.item_pessoas, parent, false)
+
+        return ViewHolderPessoas(itemPessoas)
     }
 
     /**
@@ -125,9 +117,9 @@ class AdapterMarcacoes(val fragment: ListaMarcacoesFragment): RecyclerView.Adapt
      * item at the given position in the data set.
      * @param position The position of the item within the adapter's data set.
      */
-    override fun onBindViewHolder(holder: ViewHolderMarcacao, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolderPessoas, position: Int) {
         cursor!!.moveToPosition(position)
-        holder.atualizaMarcacao(Marcacoes.fromCursor(cursor!!))
+        holder.atualizaUtente(Pessoas.fromCursor(cursor!!))
     }
 
     /**

@@ -15,9 +15,9 @@ class BdMarcacoesOpenHelper(context: Context?)
      */
     override fun onCreate(db: SQLiteDatabase?) {
         if (db != null) {
-            TabelaVacina(db).cria()
+            TabelaVacinas(db).cria()
             TabelaPessoas(db).cria()
-            TabelaMarcacoes(db).cria()
+            TabelaMarcacao(db).cria()
         }
     }
 

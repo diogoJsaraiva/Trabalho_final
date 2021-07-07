@@ -8,7 +8,7 @@ import android.database.Cursor
 import android.net.Uri
 import android.provider.BaseColumns
 
-class ContentProviderMarcacoes   : ContentProvider(){
+class ContentProviderPessoas   : ContentProvider(){
     private var bdMarcacoesOpenHelper : BdMarcacoesOpenHelper? = null
 
     override fun onCreate(): Boolean {
@@ -29,7 +29,7 @@ class ContentProviderMarcacoes   : ContentProvider(){
 
 
         return when(getUriMatcher().match(uri)){
-            URI_VACINA -> TabelaVacina(bd).query(
+            URI_VACINA -> TabelaVacinas(bd).query(
                     projection as Array<String>,
                     selection,
                     selectionArgs as Array<String>,
@@ -37,7 +37,7 @@ class ContentProviderMarcacoes   : ContentProvider(){
                     null,
                     sortOrder
             )
-            URI_VACINA_ESPECIFICO -> TabelaVacina(bd).query(
+            URI_VACINA_ESPECIFICO -> TabelaVacinas(bd).query(
                     projection as Array<String>,
                     "${BaseColumns._ID}=?",
                     arrayOf(uri.lastPathSegment!!), // id
@@ -61,7 +61,7 @@ class ContentProviderMarcacoes   : ContentProvider(){
                     null,
                     null
             )
-            URI_MARCACOES -> TabelaMarcacoes(bd).query(
+            URI_MARCACOES -> TabelaMarcacao(bd).query(
                     projection as Array<String>,
                     selection,
                     selectionArgs as Array<String>,
@@ -69,7 +69,7 @@ class ContentProviderMarcacoes   : ContentProvider(){
                     null,
                     sortOrder
             )
-            URI_MARCACOES_ESPECIFICO->TabelaMarcacoes(bd).query(
+            URI_MARCACOES_ESPECIFICO->TabelaMarcacao(bd).query(
                     projection as Array<String>,
                     "${BaseColumns._ID}=?",
                     arrayOf(uri.lastPathSegment!!), // id
@@ -97,9 +97,9 @@ class ContentProviderMarcacoes   : ContentProvider(){
         val bd = bdMarcacoesOpenHelper!!.writableDatabase
 
         val id = when(getUriMatcher().match(uri)){
-            URI_VACINA -> TabelaVacina(bd).insert(values!!)
+            URI_VACINA -> TabelaVacinas(bd).insert(values!!)
             URI_PESSOAS -> TabelaPessoas(bd).insert(values!!)
-            URI_MARCACOES-> TabelaMarcacoes(bd).insert(values!!)
+            URI_MARCACOES-> TabelaMarcacao(bd).insert(values!!)
             else -> -1
         }
 
@@ -111,7 +111,7 @@ class ContentProviderMarcacoes   : ContentProvider(){
         val bd = bdMarcacoesOpenHelper!!.writableDatabase
 
         return when(getUriMatcher().match(uri)){
-            URI_VACINA_ESPECIFICO -> TabelaVacina(bd).delete(
+            URI_VACINA_ESPECIFICO -> TabelaVacinas(bd).delete(
                     "${BaseColumns._ID}=?",
                     arrayOf(uri.lastPathSegment!!) // id
             )
@@ -119,7 +119,7 @@ class ContentProviderMarcacoes   : ContentProvider(){
                     "${BaseColumns._ID}=?",
                     arrayOf(uri.lastPathSegment!!) // id
             )
-            URI_MARCACOES_ESPECIFICO ->TabelaMarcacoes(bd).delete(
+            URI_MARCACOES_ESPECIFICO ->TabelaMarcacao(bd).delete(
                     "${BaseColumns._ID}=?",
                     arrayOf(uri.lastPathSegment!!) // id
             )
@@ -136,7 +136,7 @@ class ContentProviderMarcacoes   : ContentProvider(){
         val bd = bdMarcacoesOpenHelper!!.writableDatabase
 
         return when(getUriMatcher().match(uri)){
-            URI_VACINA_ESPECIFICO -> TabelaVacina(bd).update(
+            URI_VACINA_ESPECIFICO -> TabelaVacinas(bd).update(
                     values!!,
                     "${BaseColumns._ID}=?",
                     arrayOf(uri.lastPathSegment!!) // id
@@ -146,7 +146,7 @@ class ContentProviderMarcacoes   : ContentProvider(){
                     "${BaseColumns._ID}=?",
                     arrayOf(uri.lastPathSegment!!) // id
             )
-            URI_MARCACOES_ESPECIFICO ->TabelaMarcacoes(bd).update(
+            URI_MARCACOES_ESPECIFICO ->TabelaMarcacao(bd).update(
                     values!!,
                     "${BaseColumns._ID}=?",
                     arrayOf(uri.lastPathSegment!!) // id
@@ -179,12 +179,12 @@ class ContentProviderMarcacoes   : ContentProvider(){
         private fun getUriMatcher() : UriMatcher {
             val uriMatcher = UriMatcher(UriMatcher.NO_MATCH)
 
-            uriMatcher.addURI(AUTHORITY, VACINA, 100)
-            uriMatcher.addURI(AUTHORITY, "$VACINA/#", 101)
-            uriMatcher.addURI(AUTHORITY, PESSOAS, 200)
-            uriMatcher.addURI(AUTHORITY, "$PESSOAS/#", 201)
-            uriMatcher.addURI(AUTHORITY, MARCACAO, 300)
-            uriMatcher.addURI(AUTHORITY, "$MARCACAO/#", 301)
+            uriMatcher.addURI(AUTHORITY, VACINA, URI_VACINA)
+            uriMatcher.addURI(AUTHORITY, "$VACINA/#", URI_VACINA_ESPECIFICO)
+            uriMatcher.addURI(AUTHORITY, PESSOAS, URI_PESSOAS)
+            uriMatcher.addURI(AUTHORITY, "$PESSOAS/#", URI_PESSOAS_ESPECIFICO)
+            uriMatcher.addURI(AUTHORITY, MARCACAO, URI_MARCACOES)
+            uriMatcher.addURI(AUTHORITY, "$MARCACAO/#", URI_MARCACOES_ESPECIFICO)
 
             return uriMatcher
         }
