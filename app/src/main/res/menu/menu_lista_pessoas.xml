@@ -1,22 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".com.example.projetofinalandroid.MainActivity">
+    tools:context="pt.ipg.trabalhofinal.MainActivity">
     <item
-        android:id="@+id/action_novo_marcacao"
+        android:id="@+id/action_nova_pessoa"
         android:icon="@android:drawable/ic_input_add"
-        android:title="@string/adicionarmarcacao"
+        android:title="@string/nova_pessoa"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_alterar_marcacao"
+        android:id="@+id/action_editar_pessoa"
         android:icon="@android:drawable/ic_menu_edit"
-        android:title="@string/editarmarcacao"
+        android:title="@string/editar_pessoa"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_eliminar_marcacao"
+        android:id="@+id/action_eliminar_Pessoa"
         android:icon="@android:drawable/ic_menu_delete"
-        android:title="@string/eliminarmarcacao"
+        android:title="Eliminar pessoa"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_settings"

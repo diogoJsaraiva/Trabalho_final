@@ -7,31 +7,43 @@
 
     <fragment
         android:id="@+id/Lista_MarcacoesFragment"
-        android:name="com.example.projetofinalandroid.ListaMarcacoesFragment"
-        tools:layout="@layout/fragment_marcacoes_lista">
+        android:name="com.example.projetofinalandroid.ListaPessoasFragment"
+        tools:layout="@layout/fragment_pessoas_lista">
         <action
-            android:id="@+id/lista_MarcacoesFragment_to_Marcacoes_novo"
-            app:destination="@id/Marcacoes_novo" />
+            android:id="@+id/action_Lista_MarcacoesFragment_to_editaPessoaFragment"
+            app:destination="@id/editaPessoaFragment" />
         <action
-            android:id="@+id/action_Lista_MarcacoesFragment_to_alteraMarcacaoFragment"
-            app:destination="@id/alteraMarcacaoFragment" />
+            android:id="@+id/action_Lista_MarcacoesFragment_to_eliminaPessoaFragment"
+            app:destination="@id/eliminaPessoaFragment" />
+        <action
+            android:id="@+id/action_Lista_MarcacoesFragment_to_novaPessoaFragment"
+            app:destination="@id/novaPessoaFragment" />
     </fragment>
     <fragment
-        android:id="@+id/Marcacoes_novo"
-        android:name="com.example.projetofinalandroid.NovoMarcacaoFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_novo_marcacao">
+        android:id="@+id/editaPessoaFragment"
+        android:name="com.example.projetofinalandroid.EditaPessoaFragment"
+        android:label="fragment_altera_pessoas"
+        tools:layout="@layout/fragment_altera_pessoas" >
         <action
-            android:id="@+id/action_marcacoes_novo_to_action_lista_MarcacoesFragment"
+            android:id="@+id/action_editaPessoaFragment_to_Lista_MarcacoesFragment"
             app:destination="@id/Lista_MarcacoesFragment" />
     </fragment>
     <fragment
-        android:id="@+id/alteraMarcacaoFragment"
-        android:name="com.example.projetofinalandroid.AlteraMarcacaoFragment"
-        android:label="fragment_altera_marcacao"
-        tools:layout="@layout/fragment_altera_marcacao" >
+        android:id="@+id/novaPessoaFragment"
+        android:name="com.example.projetofinalandroid.NovaPessoaFragment"
+        android:label="fragment_novo_pessoas"
+        tools:layout="@layout/fragment_novo_pessoas" >
         <action
-            android:id="@+id/action_alteraMarcacaoFragment_to_Lista_MarcacoesFragment"
+            android:id="@+id/action_novaPessoaFragment_to_Lista_MarcacoesFragment"
+            app:destination="@id/Lista_MarcacoesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eliminaPessoaFragment"
+        android:name="com.example.projetofinalandroid.EliminaPessoaFragment"
+        android:label="fragment_elemina_pessoa"
+        tools:layout="@layout/fragment_elemina_pessoa" >
+        <action
+            android:id="@+id/action_eliminaPessoaFragment_to_Lista_MarcacoesFragment"
             app:destination="@id/Lista_MarcacoesFragment" />
     </fragment>
 </navigation>

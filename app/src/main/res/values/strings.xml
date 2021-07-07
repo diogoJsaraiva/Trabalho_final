@@ -1,24 +1,32 @@
 <resources>
-    <string name="app_name">Projeto final Android</string>
+    <string name="app_name">TrabalhoFinal</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="lista_pessoas_fragment_label">Pessoas</string>
+    <string name="novo_pessoas_fragment_label">Nova Pessoa</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="textview">TextView</string>
-    <string name="data">12/10/2000</string>
-    <string name="numero_dose">1</string>
-    <string name="spinnervacina">spinnerVacina</string>
-    <string name="adicionarmarcacao">adicionarMarcacao</string>
-    <string name="editarmarcacao">EditarMarcacao</string>
-    <string name="eliminarmarcacao">EliminarMarcacao</string>
-    <string name="spinnerpessoa">spinnerPessoa</string>
-    <string name="Exemplo_Data">12/10/2000</string>
-    <string name="guardar">guardar</string>
-    <string name="cancelar">cancelar</string>
-    <string name="qual_o_numero_da_dose">Qual o numero da dose</string>
+
+
+    <string name="nome">Nome</string>
+    <string name="telefone">Telefone</string>
+    <string name="email">Email</string>
+    <string name="morada">Morada</string>
+    <string name="data_nascimento">Data de Nascimento</string>
+    <string name="versao">Pessoas v. 1.0</string>
+    <string name="guardar">Guardar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="preencha_nome">Preencha o título</string>
+    <string name="preencha_telefone">Preencha o telefone</string>
+    <string name="preencha_email">Preencha o email</string>
+    <string name="preencha_morada">Preencha a morada</string>
+    <string name="preencha_data_nascimento">Preencha a data de nascimento</string>
+    <string name="erro_inserir_pessoa">Erro ao inserir PEssoa</string>
+    <string name="utente_guardado_sucesso">PEssoa guardado com sucesso</string>
+    <string name="data_de_nacimento">Data de Nacimento</string>
+    <string name="nome_text">nome</string>
+    <string name="editar_pessoa">editar_pessoa</string>
+    <string name="nova_pessoa">nova pessoa</string>
+
 </resources>
